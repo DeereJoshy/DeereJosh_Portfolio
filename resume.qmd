@@ -1,87 +1,66 @@
 ---
 layout: cv
-title: Isaac Newtons's CV
+title: Josh Deere's CV
 ---
-# Isaac Newton
-Physicist, Mathematician, Cambridge professor.
+# Josh Deere
+Student
 
 <div id="webaddress">
-<a href="isaac@applesdofall.org">isaac@applesdofall.org</a>
-| <a href="http://en.wikipedia.org/wiki/Isaac_Newton">My wikipedia page</a>
+<a href="deerejoshm@gmail.com">deerejoshm@gmail.com</a>
+| <a href="https://www.linkedin.com/in/deere-joshua/">My LinkedIn</a>
 </div>
-
-
-## Currently
-
-Standing on the shoulders of giants
-
-### Specialized in
-
-Laws of motion, gravitation, minting coins, disliking [Robert Hooke](http://en.wikipedia.org/wiki/Robert_Hooke)
-
-
-### Research interests
-
-Cooling, power series, optics, alchemy, planetary motions, apples.
-
 
 ## Education
 
-`1654-1660`
-__The King's School, Grantham.__
+`2020-2025`
+Brigham Young University-Idaho, Business Analytics
 
-`June 1661 - now`
-__Trinity College, Cambridge__
+Related Courses: Managerial Accounting, Spreadsheet Analysis for Business, Programming With Functions, Business Analytics, Financial Management, Business Statistics, Data Science Programming, Database Design and Development, Business Intelligence and Analysis
 
-- Sizar
+## Employment
 
-`1667 - death`
-__Trinity College, Cambridge__
+`April 2023-Sep 2023`
+__BYU-I__, *Project Coordinator*, Rexburg, ID
 
-- Fellow
+- Promoted to Coordinator in less than 14 weeks after starting position
+- Directed a team of students in accomplishing grounds-keeping tasks in 4 hour increments
+- Offered assistance each week to other teams to complete advanced and complicated projects as coordinator for both groups
+- Performed physically strenuous tasks for long hours both in a team and solo environment such as heavy equipment operation and        maintenance
+- Coordinated with Supervisor Lead to plan weekly agenda and projects requiring immediate attention
 
+`May 2022-Aug 2022`
+__Mountain America Credit Union__, *Member Experience Officer*, Idaho Falls, ID
 
+- Organized branch data and loan volume in Excel to improve performance metrics in branch
+- Prepared and processed personal and business loan documents in Word for colleagues after only one week of training
+- Rescued up to $100k in predatory loans in auto, credit card, and personal loan market after only 3 months
+- Finalized all loan applications on day of credit pull or within one week of loan request
+- Completed all loan applications with little or no compliance errors after only 1 month of working
 
-## Awards
+`April 2021-Sep 2021`
+__Chick-fil-a__, *Team Lead*, Colorado Springs, CO
 
-`2012`
-President, *Royal Society*, London, UK
+- Trained for leadership position within 2 months of training while advancing productivity by 15%
+- Learned and mastered all positions in less than two months
+- Implemented new employee performance metric and customer outreach program with owner after only 1 month
 
-Associate, *French Academy of Science*, Paris, France
+## Involvement and Activities
 
+- Jazz ensemble Lead drummer
+- Various physical pursuits such as Football and Bodybuilding
+- Served as a missionary for 2 years in South America as a leader of up to twelve American and Foreign colleagues
+- Door to door sales and marketing experience
+- Competed in conference championships for Shotput in 1st season
 
+## Skills
 
-## Publications
-
-<!-- A list is also available [online](http://scholar.google.co.uk/citations?user=LTOTl0YAAAAJ) -->
-
-### Journals
-
-`1669`
-Newton Sir I, De analysi per æquationes numero terminorum infinitas. 
-
-`1669`
-Lectiones opticæ.
-
-etc. etc. etc.
-
-### Patents
-
-`2012`
-Infinitesimal calculus for solutions to physics problems, [SMBC](http://www.techdirt.com/articles/20121011/09312820678/if-patents-had-been-around-time-newton.shtml) patent 001
-
-
-## Occupation
-
-`1600`
-__Royal Mint__, London
-
-- Warden
-- Minted coins
-
-`1600`
-__Lucasian professor of Mathematics__, Cambridge University
-
+- Power BI, Excel, Tableau, MySQL, Python, Word, PowerPoint, Outlook
+- Fluent in Spanish and Intermediate in Portuguese
+- Quick to retain information and training to ensure smooth transition to new positions
+- Flexible and dedicated ensuring proper care and attention to every detail
+- Willing to receive criticism and assistance to learn new ways to solve issues or needs dependent on each situation
+- Dependable and hardworking. Not afraid to go any number of extra miles in any situation
+- Worthy leader and communicator willing to assist with conflict resolution
 
 
 <!-- ### Footer
