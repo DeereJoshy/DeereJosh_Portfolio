@@ -1,7 +1,7 @@
 ---
-title: "Client Report - [Insert Project Title]"
-subtitle: "Course DS 250"
-author: "[STUDENT NAME]"
+# "Client Report - ["What's in a Name?"]"
+## 
+
 format:
   html:
     self-contained: true
@@ -31,162 +31,70 @@ execute:
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 ```
 
+# What's in a name?
 
 ## Elevator pitch
 
-_paste your elevator pitch here_
-_A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS._
+_Bible names have seen many twists and turns and any have fallen out of popularity compared to that of the 60s and 70s. This may be attributed to varying parenting styles or changes in culture as religion has began to fall out of the mainstream. Very few consider themselves reilgious or practicing, thus the downwards trend in use for most names_
 
 ```{python}
 #| label: project data
 #| code-summary: Read and format project data
 # Include and execute your code here
-df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/byuidatascience/data4names/master/data-raw/names_year/names_year.csv")
 ```
 
-__Highlight the Questions and Tasks__
+__Questions and Tasks__
 
 ## QUESTION|TASK 1
 
-__COPY PASTE QUESTION|TASK 1 FROM THE PROJECT HERE__
+__1. How does your name at your birth year compare to its use historically?__
 
-_type your results and analysis here_
-
-```{python}
-#| label: Q1
-#| code-summary: Read and format data
-# Include and execute your code here
-
-
-```
-
-_include figures in chunks and discuss your findings in the figure._
+_The number of people named Josh was post-slump following the 70s. The 60s and 70s saw a huge spike in use, but was followed by a sharp drop in the 80s and 90s. Nearing 2015 is one of the lowest points since the 40s. I was born in 1999 which was near a drop._
 
 ```{python}
-#| label: Q1 chart
-#| code-summary: plot example
-#| fig-cap: "My useless chart"
-#| fig-align: center
-# Include and execute your code here
-chart = px.bar(df.head(200),
-    x="name", 
-    y="AK"
+print('The number of people in 1999 with the name Josh:')
+josh = df.query('name == "Josh"')
+josh.query('year == 1999')
+fig = px.line(josh, 
+  x='year' , 
+  y='Total', 
+  title='The Rise and Fall of Josh',
+  markers= True
 )
-chart.show()
+fig.update_traces()
+fig.show()
 ```
-
-
-```{python}
-#| label: Q1 table
-#| code-summary: table example
-#| tbl-cap: "Not much of a table"
-#| tbl-cap-location: top
-# Include and execute your code here
-mydat = df.head(1000)\
-    .groupby('year')\
-    .sum()\
-    .reset_index()\
-    .tail(10)\
-    .filter(["year", "AK","AR"])
-
-display(mydat)
-
-```
-
 
 ## QUESTION|TASK 2
 
-__COPY PASTE QUESTION|TASK 2 FROM THE PROJECT HERE__
+__2. If you talked to someone named Brittany on the phone, what is your guess of his or her age? What ages would you not guess?__
 
-_type your results and analysis here_
+_The name Brittany was extremely common in the 90s. My guess is that a Brittany is most likely in their 30s or 40s. It's also a coincidence that my mother is named Brittany which helps give me a gauge on where it lies. Most likely they aren't in their 20s considering the usage rates are almost as low as the 70s._
 
 ```{python}
 #| label: Q2
-#| code-summary: Read and format data
-# Include and execute your code here
-
-
-```
-
-_include figures in chunks and discuss your findings in the figure._
-
-```{python}
-#| label: Q2 chart
-#| code-summary: plot example
-#| fig-cap: "My useless chart"
-#| fig-align: center
-# Include and execute your code here
-chart = px.bar(df.head(200),
-    x="name", 
-    y="AK"
-)
-chart.show()
-```
-
-
-```{python}
-#| label: Q2 table
-#| code-summary: table example
-#| tbl-cap: "Not much of a table"
-#| tbl-cap-location: top
-# Include and execute your code here
-mydat = df.head(1000)\
-    .groupby('year')\
-    .sum()\
-    .reset_index()\
-    .tail(10)\
-    .filter(["year", "AK","AR"])
-
-display(mydat)
-
+#| code-summary: Query the data to show only Brittany
+brittany = df.query('name == "Brittany"')
+fig = px.bar(brittany, x='year', y='Total', title='How old is Brittany?')
+fig.show()
 ```
 
 
 ## QUESTION|TASK 3
 
-__COPY PASTE QUESTION|TASK 3 FROM THE PROJECT HERE__
+__3. Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four names. What trends do you notice?__
 
 _type your results and analysis here_
 
 ```{python}
 #| label: Q3
-#| code-summary: Read and format data
-# Include and execute your code here
+#| code-summary: Filter to show names only and date ranges. Graph to show data.
+gb = df.groupby('name')
+gb.first()
 
-
-```
-
-_include figures in chunks and discuss your findings in the figure._
-
-```{python}
-#| label: Q3 chart
-#| code-summary: plot example
-#| fig-cap: "My useless chart"
-#| fig-align: center
-# Include and execute your code here
-chart = px.bar(df.head(200),
-    x="name", 
-    y="AK"
-)
-chart.show()
-```
-
-
-```{python}
-#| label: Q3 table
-#| code-summary: table example
-#| tbl-cap: "Not much of a table"
-#| tbl-cap-location: top
-# Include and execute your code here
-mydat = df.head(1000)\
-    .groupby('year')\
-    .sum()\
-    .reset_index()\
-    .tail(10)\
-    .filter(["year", "AK","AR"])
-
-display(mydat)
 
 ```
