@@ -53,7 +53,7 @@ __Questions and Tasks__
 
 __1. How does your name at your birth year compare to its use historically?__
 
-_The number of people named Josh was post-slump following the 70s. The 60s and 70s saw a huge spike in use, but was followed by a sharp drop in the 80s and 90s. Nearing 2015 is one of the lowest points since the 40s. I was born in 1999 which was near a drop._
+_The number of people named Josh was post-slump following the 70s. The 60s and 70s saw a huge spike in use, but was followed by a sharp drop in the 80s and 90s. Nearing 2015 is one of the lowest points since the 40s. I was born in 1999 which was near a drop. According to data from [Statista] https://www.statista.com/statistics/245478/self-described-religious-identification-of-americans/ Protestant and Catholic populations have declined steadily since the 70s, leading to now where 22% of the population don't consider themselves religious._
 
 ```{python}
 print('The number of people in 1999 with the name Josh:')
@@ -65,7 +65,26 @@ fig = px.line(josh,
   title='The Rise and Fall of Josh',
   markers= True
 )
-fig.update_traces()
+fig.add_shape(
+  type = 'line',
+  line_color = 'red',
+  line_width = 2,
+  opacity = 1,
+  line_dash = 'dot',
+  x0=0,
+  x1=1,
+  xref='paper',
+  y0 = 130,
+  y1 = 130,
+  yref = 'y'
+)
+fig.add_annotation(
+  text = 'My Birthday line',
+  x=1950,
+  y=140,
+  arrowhead=1,
+  showarrow=True
+)
 fig.show()
 ```
 
@@ -80,6 +99,8 @@ _The name Brittany was extremely common in the 90s. My guess is that a Brittany 
 #| code-summary: Query the data to show only Brittany
 brittany = df.query('name == "Brittany"')
 fig = px.bar(brittany, x='year', y='Total', title='How old is Brittany?')
+brittany.mean()
+
 fig.show()
 ```
 
@@ -88,13 +109,23 @@ fig.show()
 
 __3. Mary, Martha, Peter, and Paul are all Christian names. From 1920 - 2000, compare the name usage of each of the four names. What trends do you notice?__
 
-_type your results and analysis here_
+_Mary was the most common of the four, considering that the name is short and sweet. This can possibly be attributed to Mary being the mother of Jesus, which carries heavy weight in the protestant and catholic religions, the biggest and most popular on Earth. All have seen a decline but none as much as Mary who saw an 18% decrease in only 20 years._
 
 ```{python}
 #| label: Q3
 #| code-summary: Filter to show names only and date ranges. Graph to show data.
-gb = df.groupby('name')
-gb.first()
+name_list = ['Mary' , 'Martha' , 'Peter' , 'Paul']
+gb = df.query('name in @name_list')
+fig = px.line(
+  gb, 
+  x = 'year',
+  y = 'Total',
+  title = 'Where are Mary, Marth, Peter, and Paul?',
+  color = 'name'
+)
+fig.show()
+
+
 
 
 ```
