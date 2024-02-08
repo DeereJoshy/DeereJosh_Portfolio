@@ -99,7 +99,7 @@ _The name Brittany was extremely common in the 90s. My guess is that a Brittany 
 #| code-summary: Query the data to show only Brittany
 brittany = df.query('name == "Brittany"')
 fig = px.bar(brittany, x='year', y='Total', title='How old is Brittany?')
-brittany.mean()
+
 
 fig.show()
 ```
