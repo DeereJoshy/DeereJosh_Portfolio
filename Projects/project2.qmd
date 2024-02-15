@@ -48,7 +48,7 @@ __Questions and Tasks__
 
 __Fix all of the varied missing data types in the data to be consistent (all missing values should be displayed as “NaN”).__
 
-_There were several months that were written as "n/a." To maintain data integrity, those needed to be replaced with month names. Airport names were missing but included the airport code which helped with filling in the blanks._
+_There were several months that were written as "n/a." To maintain data integrity, those needed to be replaced with month names. Airport names were missing but included the airport code which helped with filling in the blanks. There were other numbers that were too high or irregular in pattern which needed to be fixed._
 
 ```{python}
 #| label: Q1
@@ -71,7 +71,7 @@ flights
 
 __Which airport has the worst delays?__
 
-_The best way to determine delays is using categories which are directly involved with the aiport itself. This is between the security checkpoints and the carrier._
+_Security checkpoints and carrier efficiency indicate how well an airport can accomodate the traffic and get people on flights. I chose these because I feel that the other variables can have extrinsic factors outside of the airport's hands. Salt Lake International experiences many delays through security and some of the flights have VERY long delays as well. With the airport expansion underway, this is clearly affecting their efficiency in getting people in and out._
 
 ```{python}
 #| label: Security
@@ -109,7 +109,7 @@ px.bar(flights,x='airport_code',y= 'sec_delays_percent',color= 'airport_code')
 
 __What is the best month to fly if you want to avoid delays of any length?__
 
-_type your results and analysis here_
+_The best month to fly out of an airport is September. This month features the least amount of delays. This month is right before the holidays when people put their heads down and save up for the end of the year. The bars are also stacked by airport so you can also see which airport has the least amount of delays and when if you need to pick the nearest international airport._
 
 ```{python}
 #| label: Q3
