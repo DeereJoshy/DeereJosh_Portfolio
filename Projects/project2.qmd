@@ -33,121 +33,81 @@ import numpy as np
 import plotly.express as px
 ```
 
-```{python}
-df = pd.read_json("https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json")
-```
 
 ## Elevator pitch
 
-_paste your elevator pitch here_
 _A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS._
 
 ```{python}
-#| label: project data
-#| code-summary: Read and format project data
-# Include and execute your code here
-df = pd.read_csv("https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv")
+flights = pd.read_json("https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json")
 ```
 
-__Highlight the Questions and Tasks__
+__Questions and Tasks__
 
 ## QUESTION|TASK 1
 
-__COPY PASTE QUESTION|TASK 1 FROM THE PROJECT HERE__
+__Fix all of the varied missing data types in the data to be consistent (all missing values should be displayed as “NaN”).__
 
-_type your results and analysis here_
+_There were several months that were written as "n/a." To maintain data integrity, those needed to be replaced with month names. Airport names were missing but included the airport code which helped with filling in the blanks._
 
 ```{python}
 #| label: Q1
 #| code-summary: Read and format data
 
+flights.month.replace(['NaN','n/a'],np.nan,inplace = True)
+flights.month.replace('Febuary','February',inplace= True)
+flights.num_of_delays_late_aircraft.replace(-999,np.nan,inplace = True)
+flights.num_of_delays_carrier.replace('1500+',1500,inplace= True)
+flights.airport_name.replace('','Washington, DC: Washington Dulles International',inplace= True)
+
+# forward fill the months 
+
+flights["month"] = flights["month"].ffill()
+
+flights
 ```
-
-_include figures in chunks and discuss your findings in the figure._
-
-```{python}
-#| label: Q1 chart
-#| code-summary: plot example
-#| fig-cap: "My useless chart"
-#| fig-align: center
-# Include and execute your code here
-chart = px.bar(df.head(200),
-    x="name", 
-    y="AK"
-)
-chart.show()
-```
-
-
-```{python}
-#| label: Q1 table
-#| code-summary: table example
-#| tbl-cap: "Not much of a table"
-#| tbl-cap-location: top
-# Include and execute your code here
-mydat = df.head(1000)\
-    .groupby('year')\
-    .sum()\
-    .reset_index()\
-    .tail(10)\
-    .filter(["year", "AK","AR"])
-
-display(mydat)
-
-```
-
 
 ## QUESTION|TASK 2
 
-__COPY PASTE QUESTION|TASK 2 FROM THE PROJECT HERE__
+__Which airport has the worst delays?__
 
-_type your results and analysis here_
+_The best way to determine delays is using categories which are directly involved with the aiport itself. This is between the security checkpoints and the carrier._
 
 ```{python}
-#| label: Q2
-#| code-summary: Read and format data
-# Include and execute your code here
+#| label: Security
+
+
+# choose which columns to use for your metric 
+# Security and carrier delays
+# I want to display percentage from the chosen columns in a table 
+security = flights.query('num_of_delays_security')
+sec_sum = flights.num_of_delays_security.sum()
+flights['sec_delays_percent'] = flights['num_of_delays_security'] / sec_sum
+print(flights)
+px.bar(flights,x='airport_code',y= 'sec_delays_percent',color= 'airport_code')
+# By airport code
+
+# airport code - columns used for calculations - percentage
+# plot this table 
+
+
 
 
 ```
 
-_include figures in chunks and discuss your findings in the figure._
 
 ```{python}
-#| label: Q2 chart
-#| code-summary: plot example
-#| fig-cap: "My useless chart"
-#| fig-align: center
-# Include and execute your code here
-chart = px.bar(df.head(200),
-    x="name", 
-    y="AK"
-)
-chart.show()
+#| label: Carrier 
+
 ```
 
 
-```{python}
-#| label: Q2 table
-#| code-summary: table example
-#| tbl-cap: "Not much of a table"
-#| tbl-cap-location: top
-# Include and execute your code here
-mydat = df.head(1000)\
-    .groupby('year')\
-    .sum()\
-    .reset_index()\
-    .tail(10)\
-    .filter(["year", "AK","AR"])
 
-display(mydat)
-
-```
 
 
 ## QUESTION|TASK 3
 
-__COPY PASTE QUESTION|TASK 3 FROM THE PROJECT HERE__
+__What is the best month to fly if you want to avoid delays of any length?__
 
 _type your results and analysis here_
 
@@ -156,38 +116,15 @@ _type your results and analysis here_
 #| code-summary: Read and format data
 # Include and execute your code here
 
+# chose your metric then create a plot 
+# your analysis should include why you chose this metric and 
+# from the plot explain what is being displayed - use refernce annotation
+px.bar(flights, x= 'month', y= 'num_of_delays_total', color= 'airport_code', title= "Hopefully Your Plane Doesn't FALL Out of The Sky")
+
 
 ```
 
-_include figures in chunks and discuss your findings in the figure._
+## QUESTION|TASK 4
 
-```{python}
-#| label: Q3 chart
-#| code-summary: plot example
-#| fig-cap: "My useless chart"
-#| fig-align: center
-# Include and execute your code here
-chart = px.bar(df.head(200),
-    x="name", 
-    y="AK"
-)
-chart.show()
-```
+__"...create a new column that calculates the total number of flights delayed by weather (both severe and mild)"__
 
-
-```{python}
-#| label: Q3 table
-#| code-summary: table example
-#| tbl-cap: "Not much of a table"
-#| tbl-cap-location: top
-# Include and execute your code here
-mydat = df.head(1000)\
-    .groupby('year')\
-    .sum()\
-    .reset_index()\
-    .tail(10)\
-    .filter(["year", "AK","AR"])
-
-display(mydat)
-
-```
