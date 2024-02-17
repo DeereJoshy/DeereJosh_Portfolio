@@ -61,10 +61,8 @@ flights.num_of_delays_carrier.replace('1500+',1500,inplace= True)
 flights.airport_name.replace('','Washington, DC: Washington Dulles International',inplace= True)
 
 # forward fill the months 
-
 flights["month"] = flights["month"].ffill()
-
-flights
+flights.to_json()
 ```
 
 ## QUESTION|TASK 2
@@ -75,20 +73,20 @@ _Security checkpoints and carrier efficiency indicate how well an airport can ac
 
 ```{python}
 #| label: Security
+# Choose which columns to use for metric 
 
 
-# choose which columns to use for your metric 
-# Security and carrier delays
-# I want to display percentage from the chosen columns in a table 
-security = flights.query('num_of_delays_security')
-sec_sum = flights.num_of_delays_security.sum()
-flights['sec_delays_percent'] = flights['num_of_delays_security'] / sec_sum
-print(flights)
-px.bar(flights,x='airport_code',y= 'sec_delays_percent',color= 'airport_code')
-# By airport code
-
+flights['total_delays_perc'] = flights['num_of_delays_total'] / flights['num_of_flights_total']
+flights
+# I want to display percentage from the chosen columns in a table by airport code
+px.bar(flights,x='airport_code',y= 'total_delays_perc',color= 'month')
 # airport code - columns used for calculations - percentage
-# plot this table 
+
+summary = flights[['airport_code','num_of_flights_total' , 'num_of_delays_total','total_delays_perc']]
+summary
+
+# plot this table: Total num of flights, etc.
+# Total num of delays proportion 
 
 
 
@@ -120,6 +118,8 @@ _The best month to fly out of an airport is September. This month features the l
 # your analysis should include why you chose this metric and 
 # from the plot explain what is being displayed - use refernce annotation
 px.bar(flights, x= 'month', y= 'num_of_delays_total', color= 'airport_code', title= "Hopefully Your Plane Doesn't FALL Out of The Sky")
+# color by month and add data callouts
+# Build a summary table to shortcut to data. Calculate first.
 
 
 ```
