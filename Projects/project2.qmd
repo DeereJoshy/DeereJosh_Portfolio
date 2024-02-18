@@ -36,7 +36,7 @@ import plotly.express as px
 
 ## Elevator pitch
 
-_A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS._
+_The fall is by far the best time to fly given that most people are busy during this time with work and vacations. Specifically, September and November don't have many delays, surpising given that November is a busy time with the holidays beginning. San Francisco is the airport with the most delays which makes sense since California is a very popular international vacation destination._
 
 ```{python}
 flights = pd.read_json("https://raw.githubusercontent.com/byuidatascience/data4missing/master/data-raw/flights_missing/flights_missing.json")
@@ -76,10 +76,11 @@ _Security checkpoints and carrier efficiency indicate how well an airport can ac
 flights['total_delays_perc'] = flights['num_of_delays_total'] / flights['num_of_flights_total']
 flights
 # I want to display percentage from the chosen columns in a table by airport code
-px.bar(flights,x='airport_code',y= 'total_delays_perc',color= 'month')
+fig = px.bar(flights,x='airport_code',y= 'total_delays_perc',color= 'month')
 # airport code - columns used for calculations - percentage
 summary = flights[['airport_code','num_of_flights_total' , 'num_of_delays_total','total_delays_perc']]
 summary
+fig.show()
 
 ```
 
