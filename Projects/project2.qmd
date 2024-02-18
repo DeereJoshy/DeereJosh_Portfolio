@@ -56,11 +56,10 @@ _There were several months that were written as "n/a." To maintain data integrit
 
 flights.month.replace(['NaN','n/a'],np.nan,inplace = True)
 flights.month.replace('Febuary','February',inplace= True)
-flights.num_of_delays_late_aircraft.replace(-999,np.nan,inplace = True)
+late_mean = flights.num_of_delays_late_aircraft.mean(skipna= True)
+flights.num_of_delays_late_aircraft.replace(-999,late_mean,inplace = True)
 flights.num_of_delays_carrier.replace('1500+',1500,inplace= True)
 flights.airport_name.replace('','Washington, DC: Washington Dulles International',inplace= True)
-
-# forward fill the months 
 flights["month"] = flights["month"].ffill()
 flights.to_json()
 ```
@@ -74,34 +73,15 @@ _Security checkpoints and carrier efficiency indicate how well an airport can ac
 ```{python}
 #| label: Security
 # Choose which columns to use for metric 
-
-
 flights['total_delays_perc'] = flights['num_of_delays_total'] / flights['num_of_flights_total']
 flights
 # I want to display percentage from the chosen columns in a table by airport code
 px.bar(flights,x='airport_code',y= 'total_delays_perc',color= 'month')
 # airport code - columns used for calculations - percentage
-
 summary = flights[['airport_code','num_of_flights_total' , 'num_of_delays_total','total_delays_perc']]
 summary
 
-# plot this table: Total num of flights, etc.
-# Total num of delays proportion 
-
-
-
-
 ```
-
-
-```{python}
-#| label: Carrier 
-
-```
-
-
-
-
 
 ## QUESTION|TASK 3
 
@@ -112,19 +92,48 @@ _The best month to fly out of an airport is September. This month features the l
 ```{python}
 #| label: Q3
 #| code-summary: Read and format data
-# Include and execute your code here
-
-# chose your metric then create a plot 
-# your analysis should include why you chose this metric and 
-# from the plot explain what is being displayed - use refernce annotation
-px.bar(flights, x= 'month', y= 'num_of_delays_total', color= 'airport_code', title= "Hopefully Your Plane Doesn't FALL Out of The Sky")
-# color by month and add data callouts
-# Build a summary table to shortcut to data. Calculate first.
-
-
+# Create sum for September and November
+months = flights.groupby('month')
+least = totals.num_of_delays_total.sum().min()
+# Make graph
+graph = px.bar(flights, x= 'month', 
+y= 'num_of_delays_total', 
+color= 'month', 
+title= "Hopefully Your Plane Doesn't FALL Out of The Sky"
+)
+# Label least amount
+graph.add_annotation(text= '206,223',
+x= 'September', 
+y= least
+)
+# Label 2nd least
+graph.add_annotation(text= '209,559',
+x= 'November', 
+y= 209559
+)
 ```
 
 ## QUESTION|TASK 4
 
 __"...create a new column that calculates the total number of flights delayed by weather (both severe and mild)"__
+
+```{python}
+'''100% of delayed flights in the Weather category are due to weather. 
+30% of all delayed flights in the Late-Arriving category are due to weather.
+From April to August, 40% of delayed flights in the NAS category are due to weather. The rest of the months, the proportion rises to 65%.
+'''
+# Late Arriving
+flights['aircraft_weather_delays'] = flights['num_of_delays_late_aircraft'].multiply(0.3).round(0)
+# Apr - Aug flights
+flights['nas_april_to_august'] = flights['num_of_delays_nas'].filter(items= ['April','May','June','July','August']).multiply(0.4).round(0) 
+# Rest of year
+flights['nas_rest'] = flights['num_of_delays_nas'].filter(items= ['January','February','March','September','October','November','December']).multiply(0.65).round(0)
+
+
+```
+
+
+## QUESTION|TASK 5
+
+__Using the new weather variable calculated above, create a barplot showing the proportion of all flights that are delayed by weather at each airport. Discuss what you learn from this graph.__
 
