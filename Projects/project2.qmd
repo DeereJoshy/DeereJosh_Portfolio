@@ -74,13 +74,12 @@ _Security checkpoints and carrier efficiency indicate how well an airport can ac
 #| label: Security
 # Choose which columns to use for metric 
 flights['total_delays_perc'] = flights['num_of_delays_total'] / flights['num_of_flights_total']
-flights
 # I want to display percentage from the chosen columns in a table by airport code
 fig = px.bar(flights,x='airport_code',y= 'total_delays_perc',color= 'month')
+fig.show()
 # airport code - columns used for calculations - percentage
 summary = flights[['airport_code','num_of_flights_total' , 'num_of_delays_total','total_delays_perc']]
 summary
-fig.show()
 
 ```
 
@@ -95,7 +94,7 @@ _The best month to fly out of an airport is September. This month features the l
 #| code-summary: Read and format data
 # Create sum for September and November
 months = flights.groupby('month')
-least = totals.num_of_delays_total.sum().min()
+least = months.num_of_delays_total.sum().min()
 # Make graph
 graph = px.bar(flights, x= 'month', 
 y= 'num_of_delays_total', 
