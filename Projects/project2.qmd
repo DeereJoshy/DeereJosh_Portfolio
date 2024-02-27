@@ -125,10 +125,17 @@ From April to August, 40% of delayed flights in the NAS category are due to weat
 # Late Arriving
 flights['aircraft_weather_delays'] = flights['num_of_delays_late_aircraft'].multiply(0.3).round(0)
 # Apr - Aug flights
-flights['nas_april_to_august'] = flights['num_of_delays_nas'].filter(items= ['April','May','June','July','August']).multiply(0.4).round(0) 
-# Rest of year
-flights['nas_rest'] = flights['num_of_delays_nas'].filter(items= ['January','February','March','September','October','November','December']).multiply(0.65).round(0)
+# flights['nas_april_to_august'] = flights['num_of_delays_nas'].filter(items= ['April','May','June','July','August']).multiply(0.4).round(0) 
+# # Rest of year
+# flights['nas_rest'] = flights['num_of_delays_nas'].filter(items= ['January','February','March','September','October','November','December']).multiply(0.65).round(0)
 
+flights['nas'] =  np.where(flights.month.isin(['April','May','June','July','August.']),flights['num_of_delays_nas'].multiply(0.4).round(0),flights['num_of_delays_nas'].multiply(0.65).round(0))
+
+flights['weather'] = flights['nas'] +  flights['aircraft_weather_delays'] +  flights['num_of_delays_weather']
+
+flights['weather_delay_proportion'] = flights.weather / flights.num_of_delays_total
+
+flights['weather_delay_total'] = flights.weather / flights.num_of_flights_total
 
 ```
 
