@@ -29,6 +29,7 @@ execute:
 import pandas as pd
 import numpy as np
 import sqlite3
+import plotly_express as px
 ```
 
 ```{python}
@@ -73,7 +74,7 @@ _There are a lot of players who only were at bat once and had a hit, giving them
 
 ```{python}
 q = '''
-SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage
+SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage%
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 1
@@ -88,7 +89,7 @@ __2. Show the top 5 results in your report. Use the same query as above, but onl
 
 ```{python}
 q2 = '''
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage%
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 10
@@ -103,10 +104,10 @@ __3.Now calculate the batting average for players over their entire careers (all
 
 ```{python}
 q3 = '''
-SELECT playerID, yearID, AB, SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS battingAverage
+SELECT playerID, SUM(AB), SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS 'battingAverage%'
 FROM Batting
 GROUP BY playerID
-HAVING AB >= 100
+HAVING SUM(AB) >= 100
 ORDER BY SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 * 100 DESC, playerID
 LIMIT 5
 '''
@@ -137,6 +138,13 @@ FROM Teams
 WHERE name LIKE "New York Yankees"
 ORDER BY W DESC
 '''
+# Sox in where clause with AND to put on same table
 pd.read_sql_query(qy, con)
 
+```
+
+```{python}
+fig = pd.read_sql_query(qy, con)
+
+fig = px.scatter(title= 'The Yankees and The Sox' , x = 'yearID', y = 'W/L Ratio')
 ```
