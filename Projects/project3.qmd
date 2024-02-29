@@ -1,7 +1,7 @@
 ---
 title: "Client Report - Finding Relationships in Baseball"
 subtitle: "Course DS 250"
-author: "[STUDENT NAME]"
+author: "Josh Deere"
 format:
   html:
     self-contained: true
@@ -25,26 +25,118 @@ execute:
     
 ---
 
+```{python}
 import pandas as pd
 import numpy as np
 import sqlite3
+```
 
-
+```{python}
+sqlite_file = 'lahmansbaseballdb.sqlite'
+con = sqlite3.connect(sqlite_file)
+```
 
 ## Elevator pitch
 
 _paste your elevator pitch here_
 _A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS._
 
-# %%
-# careful to list your path to the file or save it in the same place as your .qmd or .py file
+## DELIVERABLE 1
+
+__Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.__
+
+_A lot of players are with SLN and FLO_
+
+ ```{python}
+q = '''
+SELECT DISTINCT c.playerID, s.schoolID, sa.salary, sa.yearID, sa.teamID
+FROM CollegePlaying AS c
+JOIN Schools AS s
+ON c.schoolID = s.schoolID
+LEFT JOIN salaries AS sa
+ON c.playerID = sa.playerID
+WHERE s.name_full LIKE "Brigham Young University-Idaho"
+ORDER BY sa.salary DESC
+'''
+results = pd.read_sql_query(q, con)
+results
+```
+
+
+## DELIVERABLE 2
+
+__This three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)__ 
+
+_1. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically._ 
+
+_Analysis_
 
 ```{python}
-sqlite_file = 'lahmansbaseballdb.sqlite'
-con = sqlite3.connect(sqlite_file)
+q = '''
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+FROM Batting
+GROUP BY playerID
+HAVING AB >= 1
+ORDER BY battingAverage DESC, playerID 
+LIMIT 5
+'''
+results = pd.read_sql_query(q, con)
+results
+```
 
-q = 'SELECT * FROM allstarfull LIMIT 5'
-results = pd.read_sql_query(q,con)
+__2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.__
 
+```{python}
+q2 = '''
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+FROM Batting
+GROUP BY playerID
+HAVING AB >= 10
+ORDER BY battingAverage DESC, playerID
+LIMIT 5
+'''
+results = pd.read_sql_query(q2, con)
+results
+```
+
+__3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.__
+
+```{python}
+q3 = '''
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+FROM Batting
+GROUP BY playerID
+HAVING AB >= 100
+ORDER BY battingAverage DESC, playerID
+LIMIT 5
+'''
+results = pd.read_sql_query(q3, con)
+results
+```
+
+## DELIVERABLE 3
+
+__Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Plotly Express to visualize the comparison. What do you learn?__
+
+_Analysis_
+
+```{python}
+q = '''
+SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'
+FROM Teams
+WHERE teamID LIKE "BOS"
+ORDER BY W DESC
+'''
+results = pd.read_sql_query(q, con)
+results
+```
+```{python}
+q = '''
+SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'
+FROM Teams
+WHERE teamID LIKE ""
+ORDER BY W DESC
+'''
+results = pd.read_sql_query(q, con)
 results
 ```
