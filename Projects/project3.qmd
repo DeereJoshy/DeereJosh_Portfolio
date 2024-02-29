@@ -45,7 +45,7 @@ _A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METR
 
 __Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.__
 
-_A lot of players are with SLN and FLO._
+_A lot of players are with SLN and FLO and making a decent salary. There is a player who is not listed in the salary table which would be missed without the proper join._
 
  ```{python}
 q = '''
@@ -69,15 +69,15 @@ __This three-part question requires you to calculate batting average (number of 
 
 _1. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically._ 
 
-_Analysis_
+_There are a lot of players who only were at bat once and had a hit, giving them a 100% average. Of course, the more at bats, the lower the average because they aren't robots and can hit everything._
 
 ```{python}
 q = '''
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 1
-ORDER BY battingAverage DESC, playerID 
+ORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) DESC, playerID 
 LIMIT 5
 '''
 pd.read_sql_query(q, con)
@@ -88,11 +88,11 @@ __2. Show the top 5 results in your report. Use the same query as above, but onl
 
 ```{python}
 q2 = '''
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 10
-ORDER BY battingAverage DESC, playerID
+ORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 DESC, playerID
 LIMIT 5
 '''
 pd.read_sql_query(q2, con)
@@ -103,11 +103,11 @@ __3.Now calculate the batting average for players over their entire careers (all
 
 ```{python}
 q3 = '''
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+SELECT playerID, yearID, AB, SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 100
-ORDER BY battingAverage DESC, playerID
+ORDER BY SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 * 100 DESC, playerID
 LIMIT 5
 '''
 pd.read_sql_query(q3, con)
@@ -118,7 +118,7 @@ pd.read_sql_query(q3, con)
 
 __Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Plotly Express to visualize the comparison. What do you learn?__
 
-_Analysis_
+_The Red Sox suffered in the 20s, while the Yankees dominated the conference. But some of the Sox's best seasons have been within the last 50 years, while the Yankees have struggled as of late._
 
 ```{python}
 qs = '''
