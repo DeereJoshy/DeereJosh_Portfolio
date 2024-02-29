@@ -48,7 +48,7 @@ __Write an SQL query to create a new dataframe about baseball players who attend
 _A lot of players are with SLN and FLO_
 
  ```{python}
-q = '''
+q = 
 SELECT DISTINCT c.playerID, s.schoolID, sa.salary, sa.yearID, sa.teamID
 FROM CollegePlaying AS c
 JOIN Schools AS s
@@ -57,7 +57,7 @@ LEFT JOIN salaries AS sa
 ON c.playerID = sa.playerID
 WHERE s.name_full LIKE "Brigham Young University-Idaho"
 ORDER BY sa.salary DESC
-'''
+
 results = pd.read_sql_query(q, con)
 results
 ```
@@ -72,14 +72,14 @@ _1. Write an SQL query that provides playerID, yearID, and batting average for p
 _Analysis_
 
 ```{python}
-q = '''
+q = 
 SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 1
 ORDER BY battingAverage DESC, playerID 
 LIMIT 5
-'''
+
 results = pd.read_sql_query(q, con)
 results
 ```
@@ -87,14 +87,14 @@ results
 __2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.__
 
 ```{python}
-q2 = '''
+q2 = 
 SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 10
 ORDER BY battingAverage DESC, playerID
 LIMIT 5
-'''
+
 results = pd.read_sql_query(q2, con)
 results
 ```
@@ -102,14 +102,14 @@ results
 __3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.__
 
 ```{python}
-q3 = '''
+q3 = 
 SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 100
 ORDER BY battingAverage DESC, playerID
 LIMIT 5
-'''
+
 results = pd.read_sql_query(q3, con)
 results
 ```
@@ -121,22 +121,22 @@ __Pick any two baseball teams and compare them using a metric of your choice (av
 _Analysis_
 
 ```{python}
-q = '''
+qs = 
 SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'
 FROM Teams
-WHERE teamID LIKE "BOS"
+WHERE name LIKE 'Boston Red Sox'
 ORDER BY W DESC
-'''
-results = pd.read_sql_query(q, con)
+
+results = pd.read_sql_query(qs, con)
 results
 ```
 ```{python}
-q = '''
+qy = 
 SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'
 FROM Teams
-WHERE teamID LIKE ""
+WHERE name LIKE "New York Yankees"
 ORDER BY W DESC
-'''
-results = pd.read_sql_query(q, con)
+
+results = pd.read_sql_query(qy, con)
 results
 ```
