@@ -4862,7 +4862,7 @@ vertical-align: -.125em;
   <li><a href="#deliverable-3" id="toc-deliverable-3">DELIVERABLE 3</a></li>
   </ul>
 </nav>
-<div id="b977f5a1" class="cell" data-execution_count="1">
+<div id="8d85d215" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -4870,7 +4870,7 @@ vertical-align: -.125em;
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sqlite3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="59be65c3" class="cell" data-execution_count="2">
+<div id="3e6ab205" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sqlite_file <span class="op">=</span> <span class="st">&#39;lahmansbaseballdb.sqlite&#39;</span></span>
@@ -4884,7 +4884,7 @@ vertical-align: -.125em;
 <section id="deliverable-1" class="level2">
 <h2 class="anchored" data-anchor-id="deliverable-1">DELIVERABLE 1</h2>
 <p><strong>Write an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.</strong></p>
-<p><em>A lot of players are with SLN and FLO.</em></p>
+<p><em>A lot of players are with SLN and FLO and making a decent salary. There is a player who is not listed in the salary table which would be missed without the proper join.</em></p>
 <p>q = ’’’ SELECT DISTINCT c.playerID, s.schoolID, sa.salary, sa.yearID, sa.teamID FROM CollegePlaying AS c JOIN Schools AS s ON c.schoolID = s.schoolID LEFT JOIN salaries AS sa ON c.playerID = sa.playerID WHERE s.name_full LIKE “Brigham Young University-Idaho” ORDER BY sa.salary DESC ’’’ pd.read_sql_query(q, con)</p>
 <pre><code>
 
@@ -4895,38 +4895,38 @@ __This three-part question requires you to calculate batting average (number of 
 
 _1. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically._ 
 
-_Analysis_
+_There are a lot of players who only were at bat once and had a hit, giving them a 100% average. Of course, the more at bats, the lower the average because they aren&#39;t robots and can hit everything._
 
 
 ```{python}
 q = &#39;&#39;&#39;
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB &gt;= 1
-ORDER BY battingAverage DESC, playerID 
+ORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) DESC, playerID 
 LIMIT 5
 &#39;&#39;&#39;
 pd.read_sql_query(q, con)
 </code></pre>
 <p><strong>2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.</strong></p>
 <pre class="{python}"><code>q2 = &#39;&#39;&#39;
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB &gt;= 10
-ORDER BY battingAverage DESC, playerID
+ORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 DESC, playerID
 LIMIT 5
 &#39;&#39;&#39;
 pd.read_sql_query(q2, con)
 </code></pre>
 <p><strong>3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.</strong></p>
 <pre class="{python}"><code>q3 = &#39;&#39;&#39;
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) AS battingAverage
+SELECT playerID, yearID, AB, SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS battingAverage
 FROM Batting
 GROUP BY playerID
 HAVING AB &gt;= 100
-ORDER BY battingAverage DESC, playerID
+ORDER BY SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 * 100 DESC, playerID
 LIMIT 5
 &#39;&#39;&#39;
 pd.read_sql_query(q3, con)
@@ -4935,7 +4935,7 @@ pd.read_sql_query(q3, con)
 <section id="deliverable-3" class="level2">
 <h2 class="anchored" data-anchor-id="deliverable-3">DELIVERABLE 3</h2>
 <p><strong>Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Plotly Express to visualize the comparison. What do you learn?</strong></p>
-<p><em>Analysis</em></p>
+<p><em>The Red Sox suffered in the 20s, while the Yankees dominated the conference. But some of the Sox’s best seasons have been within the last 50 years, while the Yankees have struggled as of late.</em></p>
 <pre class="{python}"><code>qs = &#39;&#39;&#39;
 SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS &#39;W/L Ratio&#39;
 FROM Teams
