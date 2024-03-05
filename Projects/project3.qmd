@@ -21,9 +21,9 @@ format:
         toggle: true
         caption: See code
 execute: 
-  warning: false
-    
+  warning: false 
 ---
+
 
 ```{python}
 import pandas as pd
@@ -47,7 +47,7 @@ __Write an SQL query to create a new dataframe about baseball players who attend
 
 _A lot of players are with SLN and FLO and making a decent salary. There is a player who is not listed in the salary table which would be missed without the proper join._
 
- ```{python}
+```{python}
 q = '''
 SELECT DISTINCT c.playerID, s.schoolID, sa.salary, sa.yearID, sa.teamID
 FROM CollegePlaying AS c
@@ -58,10 +58,9 @@ ON c.playerID = sa.playerID
 WHERE s.name_full LIKE "Brigham Young University-Idaho"
 ORDER BY sa.salary DESC
 '''
+
 pd.read_sql_query(q, con)
-
 ```
-
 
 ## DELIVERABLE 2
 
@@ -80,8 +79,8 @@ HAVING AB >= 1
 ORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) DESC, playerID 
 LIMIT 5
 '''
-pd.read_sql_query(q, con)
 
+pd.read_sql_query(q, con)
 ```
 
 __2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.__
@@ -96,7 +95,6 @@ ORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 DESC, playerID
 LIMIT 5
 '''
 pd.read_sql_query(q2, con)
-
 ```
 
 __3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.__
@@ -111,7 +109,6 @@ ORDER BY SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 * 100 DESC, player
 LIMIT 5
 '''
 pd.read_sql_query(q3, con)
-
 ```
 
 ## DELIVERABLE 3
