@@ -4862,7 +4862,7 @@ vertical-align: -.125em;
   <li><a href="#deliverable-3" id="toc-deliverable-3">DELIVERABLE 3</a></li>
   </ul>
 </nav>
-<div id="2424d13f" class="cell" data-execution_count="1">
+<div id="47ad8eba" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -4871,7 +4871,7 @@ vertical-align: -.125em;
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly_express <span class="im">as</span> px</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="4ce435cb" class="cell" data-execution_count="2">
+<div id="cfd06090" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sqlite_file <span class="op">=</span> <span class="st">&#39;lahmansbaseballdb.sqlite&#39;</span></span>
@@ -4880,7 +4880,7 @@ vertical-align: -.125em;
 </div>
 <section id="elevator-pitch" class="level2">
 <h2 class="anchored" data-anchor-id="elevator-pitch">Elevator pitch</h2>
-<p><em>paste your elevator pitch here</em> <em>A SHORT (4-5 SENTENCES) PARAGRAPH THAT <code>DESCRIBES KEY INSIGHTS</code> TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.</em></p>
+<p><em>Baseball is a very complex sport with a variety of measure to use for analysis. BYU-I has contributed to the baseball scene with players around the U.S. Batting average decreases the more you play, which is only natural considering that batters are human. The Red Sox dominate the Yankees with Wins over Losses over almost every season.</em></p>
 </section>
 <section id="deliverable-1" class="level2">
 <h2 class="anchored" data-anchor-id="deliverable-1">DELIVERABLE 1</h2>
@@ -4901,7 +4901,7 @@ _There are a lot of players who only were at bat once and had a hit, giving them
 
 ```{python}
 q = &#39;&#39;&#39;
-SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage%
+SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS &#39;battingAverage%&#39;
 FROM Batting
 GROUP BY playerID
 HAVING AB &gt;= 1
@@ -4912,7 +4912,7 @@ pd.read_sql_query(q, con)
 </code></pre>
 <p><strong>2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.</strong></p>
 <pre class="{python}"><code>q2 = &#39;&#39;&#39;
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage%
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS &#39;battingAverage%&#39;
 FROM Batting
 GROUP BY playerID
 HAVING AB &gt;= 10
@@ -4923,7 +4923,7 @@ pd.read_sql_query(q2, con)
 </code></pre>
 <p><strong>3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.</strong></p>
 <pre class="{python}"><code>q3 = &#39;&#39;&#39;
-SELECT playerID, SUM(AB), SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS &#39;battingAverage%&#39;
+SELECT playerID, SUM(AB) AS &#39;At Bats&#39;, SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS &#39;battingAverage%&#39;
 FROM Batting
 GROUP BY playerID
 HAVING SUM(AB) &gt;= 100
@@ -4937,26 +4937,20 @@ pd.read_sql_query(q3, con)
 <h2 class="anchored" data-anchor-id="deliverable-3">DELIVERABLE 3</h2>
 <p><strong>Pick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Plotly Express to visualize the comparison. What do you learn?</strong></p>
 <p><em>The Red Sox suffered in the 20s, while the Yankees dominated the conference. But some of the Sox’s best seasons have been within the last 50 years, while the Yankees have struggled as of late.</em></p>
-<pre class="{python}"><code>qs = &#39;&#39;&#39;
-SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS &#39;W/L Ratio&#39;
-FROM Teams
-WHERE name LIKE &#39;Boston Red Sox&#39;
-ORDER BY W DESC
-&#39;&#39;&#39;
-pd.read_sql_query(qs, con)
-</code></pre>
 <pre class="{python}"><code>qy = &#39;&#39;&#39;
 SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS &#39;W/L Ratio&#39;
 FROM Teams
-WHERE name LIKE &quot;New York Yankees&quot;
+WHERE name IN (&#39;New York Yankees&#39;,&#39;Boston Red Sox&#39;)
 ORDER BY W DESC
 &#39;&#39;&#39;
 # Sox in where clause with AND to put on same table
-pd.read_sql_query(qy, con)
+results = pd.read_sql_query(qy, con)
+results
 </code></pre>
 <pre class="{python}"><code>fig = pd.read_sql_query(qy, con)
 
-fig = px.scatter(title= &#39;The Yankees and The Sox&#39; , x = &#39;yearID&#39;, y = &#39;W/L Ratio&#39;)</code></pre>
+fig = px.bar (results,title= &#39;The Yankees and The Sox&#39; , x = &#39;yearID&#39;, y = &#39;W/L Ratio&#39;, color= &#39;name&#39;)
+fig.show()</code></pre>
 
 
 </section>
