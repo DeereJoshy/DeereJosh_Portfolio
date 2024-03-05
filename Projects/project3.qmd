@@ -39,8 +39,7 @@ con = sqlite3.connect(sqlite_file)
 
 ## Elevator pitch
 
-_paste your elevator pitch here_
-_A SHORT (4-5 SENTENCES) PARAGRAPH THAT `DESCRIBES KEY INSIGHTS` TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS._
+_Baseball is a very complex sport with a variety of measure to use for analysis. BYU-I has contributed to the baseball scene with players around the U.S. Batting average decreases the more you play, which is only natural considering that batters are human. The Red Sox dominate the Yankees with Wins over Losses over almost every season._
 
 ## DELIVERABLE 1
 
@@ -74,7 +73,7 @@ _There are a lot of players who only were at bat once and had a hit, giving them
 
 ```{python}
 q = '''
-SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage%
+SELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS 'battingAverage%'
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 1
@@ -89,7 +88,7 @@ __2. Show the top 5 results in your report. Use the same query as above, but onl
 
 ```{python}
 q2 = '''
-SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS battingAverage%
+SELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS 'battingAverage%'
 FROM Batting
 GROUP BY playerID
 HAVING AB >= 10
@@ -104,7 +103,7 @@ __3.Now calculate the batting average for players over their entire careers (all
 
 ```{python}
 q3 = '''
-SELECT playerID, SUM(AB), SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS 'battingAverage%'
+SELECT playerID, SUM(AB) AS 'At Bats', SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS 'battingAverage%'
 FROM Batting
 GROUP BY playerID
 HAVING SUM(AB) >= 100
@@ -122,29 +121,21 @@ __Pick any two baseball teams and compare them using a metric of your choice (av
 _The Red Sox suffered in the 20s, while the Yankees dominated the conference. But some of the Sox's best seasons have been within the last 50 years, while the Yankees have struggled as of late._
 
 ```{python}
-qs = '''
-SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'
-FROM Teams
-WHERE name LIKE 'Boston Red Sox'
-ORDER BY W DESC
-'''
-pd.read_sql_query(qs, con)
-
-```
-```{python}
 qy = '''
 SELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'
 FROM Teams
-WHERE name LIKE "New York Yankees"
+WHERE name IN ('New York Yankees','Boston Red Sox')
 ORDER BY W DESC
 '''
 # Sox in where clause with AND to put on same table
-pd.read_sql_query(qy, con)
+results = pd.read_sql_query(qy, con)
+results
 
 ```
 
 ```{python}
 fig = pd.read_sql_query(qy, con)
 
-fig = px.scatter(title= 'The Yankees and The Sox' , x = 'yearID', y = 'W/L Ratio')
+fig = px.bar (results,title= 'The Yankees and The Sox' , x = 'yearID', y = 'W/L Ratio', color= 'name')
+fig.show()
 ```
