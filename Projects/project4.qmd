@@ -84,14 +84,14 @@ fig.show()
 
 __Build a classification model labeling houses as being built “before 1980” or “during or after 1980”. Your goal is to reach or exceed 90% accuracy. Explain your final model choice (algorithm, tuning parameters, etc) and describe what other models you tried.__
 
-_type your results and analysis here_
+_I went with a decision tree model considering that they are very beginner friendly and was easy for me to understand and visualize. I did look at new models but for a lot of them I struggled to understand logic for how the algorithm was running._
 
 ```{python}
 #| label: Q2
 #| code-summary: Read and format data
-#| Include and execute your code here
- X = dwellings_ml[['nocars', 'totunits', 'stories', 'numbdrm','finbsmnt','basement','sprice']]
- y = dwellings_ml['before1980']
+# Include and execute your code here
+X = dwellings_ml[['nocars', 'totunits', 'stories', 'numbdrm','finbsmnt','basement','sprice']]
+y = dwellings_ml['before1980']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50, stratify=y)
 

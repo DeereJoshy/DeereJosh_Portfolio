@@ -38,7 +38,7 @@
     "href": "Projects/project4.html",
     "title": "Client Report - Can You Predict This",
     "section": "",
-    "text": "Show the code\n# %%\n# Load modules\nfrom sklearn.model_selection import train_test_split\nfrom sklearn import tree\nfrom sklearn import metrics",
+    "text": "Show the code\n# %%\n# Load modules\nfrom sklearn.model_selection import train_test_split\nfrom sklearn import tree\nfrom sklearn import metrics\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score",
     "crumbs": [
       "DS250 Projects",
       "Project 4"
@@ -49,7 +49,7 @@
     "href": "Projects/project4.html#elevator-pitch",
     "title": "Client Report - Can You Predict This",
     "section": "Elevator pitch",
-    "text": "Elevator pitch\npaste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Load data\ndwellings_ml = pd.read_csv('https://github.com/byuidatascience/data4dwellings/raw/master/data-raw/dwellings_ml/dwellings_ml.csv')\n\n\nHighlight the Questions and Tasks",
+    "text": "Elevator pitch\nThis project is on creating a model that can predict whether a home was built prior to implementation of rules on asbestos. I found that the best metrics for prediction are the number of dwelling units, stories in the home, and the number of car space in the garage.\n\n\nRead and format project data\n# Load data\ndwellings_ml = pd.read_csv('https://github.com/byuidatascience/data4dwellings/raw/master/data-raw/dwellings_ml/dwellings_ml.csv')\n\n\nHighlight the Questions and Tasks",
     "crumbs": [
       "DS250 Projects",
       "Project 4"
@@ -60,7 +60,7 @@
     "href": "Projects/project4.html#questiontask-1",
     "title": "Client Report - Can You Predict This",
     "section": "QUESTION|TASK 1",
-    "text": "QUESTION|TASK 1\nCreate 2-3 charts that evaluate potential relationships between the home variables and before1980. Explain what you learn from the charts that could help a machine learning algorithm.\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\nfig = px.bar(dwellings_ml, x = 'numbdrm', y = 'stories',color = 'yrbuilt')#,barmode='group',color_discrete_map={0:'RebeccaPurple',1:'MediumPurple'})\nfig.show()\n\n\n                                                \n\n\n\n\nShow the code\nfig = px.scatter(dwellings_ml, x = 'totunits', y = 'nocars',color = 'before1980')\nfig.show()",
+    "text": "QUESTION|TASK 1\nCreate 2-3 charts that evaluate potential relationships between the home variables and before1980. Explain what you learn from the charts that could help a machine learning algorithm.\nLooking at the number of bedrooms and dwelling units, I can see some semblance of pattern in determining the likelihood of a home being built before 1980. The number of car space in the garage also is a solid predictor. The basement and finished basement metrics also are valid predictors, showing that the more finished basement space, the more likely the house was built after 1980.\n\n\nRead and format data\n# Include and execute your code here\nfig = px.histogram(dwellings_ml, x = 'numbdrm', y = 'stories',color = 'before1980')#,barmode='group',color_discrete_map={0:'RebeccaPurple',1:'MediumPurple'})\nfig.show()\n\n\n                                                \n\n\n\n\nShow the code\nfig = px.scatter(dwellings_ml, x = 'totunits', y = 'nocars',color = 'before1980')\nfig.show()\n\n\n                                                \n\n\n\n\nShow the code\nfig = px.scatter(dwellings_ml, x = 'finbsmnt', y = 'basement',color = 'before1980')\nfig.show()",
     "crumbs": [
       "DS250 Projects",
       "Project 4"
@@ -71,7 +71,7 @@
     "href": "Projects/project4.html#questiontask-2",
     "title": "Client Report - Can You Predict This",
     "section": "QUESTION|TASK 2",
-    "text": "QUESTION|TASK 2\nBuild a classification model labeling houses as being built “before 1980” or “during or after 1980”. Your goal is to reach or exceed 90% accuracy. Explain your final model choice (algorithm, tuning parameters, etc) and describe what other models you tried.\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n# X_pred = dwellings_ml.filter('numbdrm')\n# y_pred = dwellings_ml.filter(regex = \"before1980\")\n# X_train, X_test, y_train, y_test = train_test_split(\n#     X_pred, y_pred, test_size = .34, random_state = 76)",
+    "text": "QUESTION|TASK 2\nBuild a classification model labeling houses as being built “before 1980” or “during or after 1980”. Your goal is to reach or exceed 90% accuracy. Explain your final model choice (algorithm, tuning parameters, etc) and describe what other models you tried.\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\nX = dwellings_ml[['nocars', 'totunits', 'stories', 'numbdrm','finbsmnt','basement','sprice']]\ny = dwellings_ml['before1980']\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50, stratify=y)\n\nrf = RandomForestClassifier(random_state=0)  \nrf.fit(X, y)  \n\ny_pred = rf.predict(X)\n\naccuracy_score(y,y_pred)\n\n\n0.9673984201108541",
     "crumbs": [
       "DS250 Projects",
       "Project 4"
