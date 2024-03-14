@@ -1,5 +1,19 @@
 [
   {
+    "objectID": "ml.html",
+    "href": "ml.html",
+    "title": "about me",
+    "section": "",
+    "text": "MarkDown Basics"
+  },
+  {
+    "objectID": "ml.html#title-2-header",
+    "href": "ml.html#title-2-header",
+    "title": "about me",
+    "section": "",
+    "text": "MarkDown Basics"
+  },
+  {
     "objectID": "exploration.html",
     "href": "exploration.html",
     "title": "about me",
@@ -9,205 +23,6 @@
   {
     "objectID": "exploration.html#title-2-header",
     "href": "exploration.html#title-2-header",
-    "title": "about me",
-    "section": "",
-    "text": "MarkDown Basics"
-  },
-  {
-    "objectID": "projects.html",
-    "href": "projects.html",
-    "title": "DS250 Projects",
-    "section": "",
-    "text": "Project 1\nProject 2\nProject 3\nProject 4\nProject 5",
-    "crumbs": [
-      "DS250 Projects"
-    ]
-  },
-  {
-    "objectID": "projects.html#repo-for-all-my-projects",
-    "href": "projects.html#repo-for-all-my-projects",
-    "title": "DS250 Projects",
-    "section": "",
-    "text": "Project 1\nProject 2\nProject 3\nProject 4\nProject 5",
-    "crumbs": [
-      "DS250 Projects"
-    ]
-  },
-  {
-    "objectID": "Projects/project3.html",
-    "href": "Projects/project3.html",
-    "title": "Client Report - Finding Relationships in Baseball",
-    "section": "",
-    "text": "Show the code\nimport pandas as pd\nimport numpy as np\nimport sqlite3\nimport plotly_express as px\nShow the code\nsqlite_file = 'lahmansbaseballdb.sqlite'\ncon = sqlite3.connect(sqlite_file)",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Projects/project3.html#elevator-pitch",
-    "href": "Projects/project3.html#elevator-pitch",
-    "title": "Client Report - Finding Relationships in Baseball",
-    "section": "Elevator pitch",
-    "text": "Elevator pitch\nBaseball is a very complex sport with a variety of measure to use for analysis. BYU-I has contributed to the baseball scene with players around the U.S. Batting average decreases the more you play, which is only natural considering that batters are human. The Yankees dominate the Red Sox with Wins over Losses over almost every season.",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Projects/project3.html#deliverable-1",
-    "href": "Projects/project3.html#deliverable-1",
-    "title": "Client Report - Finding Relationships in Baseball",
-    "section": "DELIVERABLE 1",
-    "text": "DELIVERABLE 1\nWrite an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.\nA lot of players are with SLN and FLO and making a decent salary. There is a player who is not listed in the salary table which would be missed without the proper join.\n\n\nShow the code\nq = '''\nSELECT DISTINCT c.playerID, s.schoolID, sa.salary, sa.yearID, sa.teamID\nFROM CollegePlaying AS c\nJOIN Schools AS s\nON c.schoolID = s.schoolID\nLEFT JOIN salaries AS sa\nON c.playerID = sa.playerID\nWHERE s.name_full LIKE \"Brigham Young University-Idaho\"\nORDER BY sa.salary DESC\n'''\n\npd.read_sql_query(q, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nschoolID\nsalary\nyearID\nteamID\n\n\n\n\n0\nlindsma01\nidbyuid\n4000000.0\n2014.0\nCHA\n\n\n1\nlindsma01\nidbyuid\n3600000.0\n2012.0\nBAL\n\n\n2\nlindsma01\nidbyuid\n2800000.0\n2011.0\nCOL\n\n\n3\nlindsma01\nidbyuid\n2300000.0\n2013.0\nCHA\n\n\n4\nlindsma01\nidbyuid\n1625000.0\n2010.0\nHOU\n\n\n5\nstephga01\nidbyuid\n1025000.0\n2001.0\nSLN\n\n\n6\nstephga01\nidbyuid\n900000.0\n2002.0\nSLN\n\n\n7\nstephga01\nidbyuid\n800000.0\n2003.0\nSLN\n\n\n8\nstephga01\nidbyuid\n550000.0\n2000.0\nSLN\n\n\n9\nlindsma01\nidbyuid\n410000.0\n2009.0\nFLO\n\n\n10\nlindsma01\nidbyuid\n395000.0\n2008.0\nFLO\n\n\n11\nlindsma01\nidbyuid\n380000.0\n2007.0\nFLO\n\n\n12\nstephga01\nidbyuid\n215000.0\n1999.0\nSLN\n\n\n13\nstephga01\nidbyuid\n185000.0\n1998.0\nPHI\n\n\n14\nstephga01\nidbyuid\n150000.0\n1997.0\nPHI\n\n\n15\ncatetr01\nidbyuid\nNaN\nNaN\nNone",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Projects/project3.html#deliverable-2",
-    "href": "Projects/project3.html#deliverable-2",
-    "title": "Client Report - Finding Relationships in Baseball",
-    "section": "DELIVERABLE 2",
-    "text": "DELIVERABLE 2\nThis three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)\n1. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically.\nThere are a lot of players who only were at bat once and had a hit, giving them a 100% average. Of course, the more at bats, the lower the average because they aren’t robots and can hit everything.\n\n\nShow the code\nq = '''\nSELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS 'battingAverage%'\nFROM Batting\nGROUP BY playerID\nHAVING AB &gt;= 1\nORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) DESC, playerID \nLIMIT 5\n'''\n\npd.read_sql_query(q, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nyearID\nH\nAB\nbattingAverage%\n\n\n\n\n0\nabramge01\n1923\n1\n1\n100.0\n\n\n1\nallarko01\n2018\n1\n1\n100.0\n\n\n2\nbanisje01\n1991\n1\n1\n100.0\n\n\n3\nbassdo01\n1918\n1\n1\n100.0\n\n\n4\nbergejo02\n1922\n1\n1\n100.0\n\n\n\n\n\n\n\n\n2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.\n\n\nShow the code\nq2 = '''\nSELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS 'battingAverage%'\nFROM Batting\nGROUP BY playerID\nHAVING AB &gt;= 10\nORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 DESC, playerID\nLIMIT 5\n'''\npd.read_sql_query(q2, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nyearID\nAB\nbattingAverage%\n\n\n\n\n0\nnymanny01\n1974\n14\n64.285714\n\n\n1\nsilvech01\n1948\n14\n57.142857\n\n\n2\npuccige01\n1930\n16\n56.250000\n\n\n3\napplepe01\n1927\n11\n54.545455\n\n\n4\nariasjo01\n2006\n11\n54.545455\n\n\n\n\n\n\n\n\n3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.\n\n\nShow the code\nq3 = '''\nSELECT playerID, SUM(AB) AS 'At Bats', SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS 'battingAverage%'\nFROM Batting\nGROUP BY playerID\nHAVING SUM(AB) &gt;= 100\nORDER BY SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 * 100 DESC, playerID\nLIMIT 5\n'''\npd.read_sql_query(q3, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nAt Bats\nbattingAverage%\n\n\n\n\n0\ncobbty01\n11436\n36.629941\n\n\n1\nbarnero01\n2391\n35.968214\n\n\n2\nhornsro01\n8173\n35.849749\n\n\n3\njacksjo01\n4981\n35.575186\n\n\n4\nmeyerle01\n1443\n35.550936",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Projects/project3.html#deliverable-3",
-    "href": "Projects/project3.html#deliverable-3",
-    "title": "Client Report - Finding Relationships in Baseball",
-    "section": "DELIVERABLE 3",
-    "text": "DELIVERABLE 3\nPick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Plotly Express to visualize the comparison. What do you learn?\nThe Red Sox suffered in the 20s, while the Yankees dominated the conference. But some of the Sox’s best seasons have been within the last 50 years, while the Yankees have struggled as of late.\n\n\nShow the code\nqy = '''\nSELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'\nFROM Teams\nWHERE name IN ('New York Yankees','Boston Red Sox')\nORDER BY W DESC\n'''\n# Sox in where clause with AND to put on same table\nresults = pd.read_sql_query(qy, con)\nresults\n\n\n\n\n\n\n\n\n\n\nname\nyearID\nteamID\nW\nL\nW/L Ratio\n\n\n\n\n0\nNew York Yankees\n1998\nNYA\n114\n48\n2.375000\n\n\n1\nNew York Yankees\n1927\nNYA\n110\n44\n2.500000\n\n\n2\nNew York Yankees\n1961\nNYA\n109\n53\n2.056604\n\n\n3\nBoston Red Sox\n2018\nBOS\n108\n54\n2.000000\n\n\n4\nNew York Yankees\n1932\nNYA\n107\n47\n2.276596\n\n\n...\n...\n...\n...\n...\n...\n...\n\n\n214\nBoston Red Sox\n1930\nBOS\n52\n102\n0.509804\n\n\n215\nBoston Red Sox\n1927\nBOS\n51\n103\n0.495146\n\n\n216\nBoston Red Sox\n1925\nBOS\n47\n105\n0.447619\n\n\n217\nBoston Red Sox\n1926\nBOS\n46\n107\n0.429907\n\n\n218\nBoston Red Sox\n1932\nBOS\n43\n111\n0.387387\n\n\n\n\n219 rows × 6 columns\n\n\n\n\n\n\nShow the code\nfig = pd.read_sql_query(qy, con)\n\nfig = px.bar (results,title= 'The Yankees and The Sox' , x = 'yearID', y = 'W/L Ratio', color= 'name')\nfig.show()",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 3"
-    ]
-  },
-  {
-    "objectID": "Projects/project5.html",
-    "href": "Projects/project5.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "paste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Include and execute your code here\ndf = pd.read_csv(\"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\")\n\n\nHighlight the Questions and Tasks",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Projects/project5.html#elevator-pitch",
-    "href": "Projects/project5.html#elevator-pitch",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "paste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Include and execute your code here\ndf = pd.read_csv(\"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\")\n\n\nHighlight the Questions and Tasks",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Projects/project5.html#questiontask-1",
-    "href": "Projects/project5.html#questiontask-1",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "QUESTION|TASK 1",
-    "text": "QUESTION|TASK 1\nCOPY PASTE QUESTION|TASK 1 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q1 chart .cell execution_count=4}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q1 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=5}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Projects/project5.html#questiontask-2",
-    "href": "Projects/project5.html#questiontask-2",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "QUESTION|TASK 2",
-    "text": "QUESTION|TASK 2\nCOPY PASTE QUESTION|TASK 2 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q2 chart .cell execution_count=7}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q2 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=8}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Projects/project5.html#questiontask-3",
-    "href": "Projects/project5.html#questiontask-3",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "QUESTION|TASK 3",
-    "text": "QUESTION|TASK 3\nCOPY PASTE QUESTION|TASK 3 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q3 chart .cell execution_count=10}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q3 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=11}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 5"
-    ]
-  },
-  {
-    "objectID": "Projects/project4.html",
-    "href": "Projects/project4.html",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "paste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Include and execute your code here\ndf = pd.read_csv(\"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\")\n\n\nHighlight the Questions and Tasks",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 4"
-    ]
-  },
-  {
-    "objectID": "Projects/project4.html#elevator-pitch",
-    "href": "Projects/project4.html#elevator-pitch",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "",
-    "text": "paste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Include and execute your code here\ndf = pd.read_csv(\"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\")\n\n\nHighlight the Questions and Tasks",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 4"
-    ]
-  },
-  {
-    "objectID": "Projects/project4.html#questiontask-1",
-    "href": "Projects/project4.html#questiontask-1",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "QUESTION|TASK 1",
-    "text": "QUESTION|TASK 1\nCOPY PASTE QUESTION|TASK 1 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q1 chart .cell execution_count=4}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q1 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=5}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 4"
-    ]
-  },
-  {
-    "objectID": "Projects/project4.html#questiontask-2",
-    "href": "Projects/project4.html#questiontask-2",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "QUESTION|TASK 2",
-    "text": "QUESTION|TASK 2\nCOPY PASTE QUESTION|TASK 2 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q2 chart .cell execution_count=7}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q2 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=8}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 4"
-    ]
-  },
-  {
-    "objectID": "Projects/project4.html#questiontask-3",
-    "href": "Projects/project4.html#questiontask-3",
-    "title": "Client Report - [Insert Project Title]",
-    "section": "QUESTION|TASK 3",
-    "text": "QUESTION|TASK 3\nCOPY PASTE QUESTION|TASK 3 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q3 chart .cell execution_count=10}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q3 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=11}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
-    "crumbs": [
-      "DS250 Projects",
-      "Project 4"
-    ]
-  },
-  {
-    "objectID": "cleansing.html",
-    "href": "cleansing.html",
-    "title": "about me",
-    "section": "",
-    "text": "MarkDown Basics"
-  },
-  {
-    "objectID": "cleansing.html#title-2-header",
-    "href": "cleansing.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
@@ -227,67 +42,32 @@
     "text": "MarkDown Basics"
   },
   {
-    "objectID": "competition.html",
-    "href": "competition.html",
+    "objectID": "full_stack.html",
+    "href": "full_stack.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
   },
   {
-    "objectID": "competition.html#title-2-header",
-    "href": "competition.html#title-2-header",
+    "objectID": "full_stack.html#title-2-header",
+    "href": "full_stack.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
   },
   {
-    "objectID": "ml.html",
-    "href": "ml.html",
+    "objectID": "cleansing.html",
+    "href": "cleansing.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
   },
   {
-    "objectID": "ml.html#title-2-header",
-    "href": "ml.html#title-2-header",
+    "objectID": "cleansing.html#title-2-header",
+    "href": "cleansing.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
-  },
-  {
-    "objectID": "resume.html",
-    "href": "resume.html",
-    "title": "Josh Deere’s CV",
-    "section": "",
-    "text": "Student\n\ndeerejoshm@gmail.com | My LinkedIn\n\n\n\n2020-2025 Brigham Young University-Idaho, Business Analytics\nRelated Courses: Managerial Accounting, Spreadsheet Analysis for Business, Programming With Functions, Business Analytics, Financial Management, Business Statistics, Data Science Programming, Database Design and Development, Business Intelligence and Analysis\n\n\n\nApril 2023-Sep 2023 BYU-I, Project Coordinator, Rexburg, ID\n\nPromoted to Coordinator in less than 14 weeks after starting position\nDirected a team of students in accomplishing grounds-keeping tasks in 4 hour increments\nOffered assistance each week to other teams to complete advanced and complicated projects as coordinator for both groups\nPerformed physically strenuous tasks for long hours both in a team and solo environment such as heavy equipment operation and maintenance\nCoordinated with Supervisor Lead to plan weekly agenda and projects requiring immediate attention\n\nMay 2022-Aug 2022 Mountain America Credit Union, Member Experience Officer, Idaho Falls, ID\n\nOrganized branch data and loan volume in Excel to improve performance metrics in branch\nPrepared and processed personal and business loan documents in Word for colleagues after only one week of training\nRescued up to $100k in predatory loans in auto, credit card, and personal loan market after only 3 months\nFinalized all loan applications on day of credit pull or within one week of loan request\nCompleted all loan applications with little or no compliance errors after only 1 month of working\n\nApril 2021-Sep 2021 Chick-fil-a, Team Lead, Colorado Springs, CO\n\nTrained for leadership position within 2 months of training while advancing productivity by 15%\nLearned and mastered all positions in less than two months\nImplemented new employee performance metric and customer outreach program with owner after only 1 month\n\n\n\n\n\nJazz ensemble Lead drummer\nVarious physical pursuits such as Football and Bodybuilding\nServed as a missionary for 2 years in South America as a leader of up to twelve American and Foreign colleagues\nDoor to door sales and marketing experience\nCompeted in conference championships for Shotput in 1st season\n\n\n\n\n\nPower BI, Excel, Tableau, MySQL, Python, Word, PowerPoint, Outlook\nFluent in Spanish and Intermediate in Portuguese\nQuick to retain information and training to ensure smooth transition to new positions\nFlexible and dedicated ensuring proper care and attention to every detail\nWilling to receive criticism and assistance to learn new ways to solve issues or needs dependent on each situation\nDependable and hardworking. Not afraid to go any number of extra miles in any situation\nWorthy leader and communicator willing to assist with conflict resolution"
-  },
-  {
-    "objectID": "resume.html#education",
-    "href": "resume.html#education",
-    "title": "Josh Deere’s CV",
-    "section": "",
-    "text": "2020-2025 Brigham Young University-Idaho, Business Analytics\nRelated Courses: Managerial Accounting, Spreadsheet Analysis for Business, Programming With Functions, Business Analytics, Financial Management, Business Statistics, Data Science Programming, Database Design and Development, Business Intelligence and Analysis"
-  },
-  {
-    "objectID": "resume.html#employment",
-    "href": "resume.html#employment",
-    "title": "Josh Deere’s CV",
-    "section": "",
-    "text": "April 2023-Sep 2023 BYU-I, Project Coordinator, Rexburg, ID\n\nPromoted to Coordinator in less than 14 weeks after starting position\nDirected a team of students in accomplishing grounds-keeping tasks in 4 hour increments\nOffered assistance each week to other teams to complete advanced and complicated projects as coordinator for both groups\nPerformed physically strenuous tasks for long hours both in a team and solo environment such as heavy equipment operation and maintenance\nCoordinated with Supervisor Lead to plan weekly agenda and projects requiring immediate attention\n\nMay 2022-Aug 2022 Mountain America Credit Union, Member Experience Officer, Idaho Falls, ID\n\nOrganized branch data and loan volume in Excel to improve performance metrics in branch\nPrepared and processed personal and business loan documents in Word for colleagues after only one week of training\nRescued up to $100k in predatory loans in auto, credit card, and personal loan market after only 3 months\nFinalized all loan applications on day of credit pull or within one week of loan request\nCompleted all loan applications with little or no compliance errors after only 1 month of working\n\nApril 2021-Sep 2021 Chick-fil-a, Team Lead, Colorado Springs, CO\n\nTrained for leadership position within 2 months of training while advancing productivity by 15%\nLearned and mastered all positions in less than two months\nImplemented new employee performance metric and customer outreach program with owner after only 1 month"
-  },
-  {
-    "objectID": "resume.html#involvement-and-activities",
-    "href": "resume.html#involvement-and-activities",
-    "title": "Josh Deere’s CV",
-    "section": "",
-    "text": "Jazz ensemble Lead drummer\nVarious physical pursuits such as Football and Bodybuilding\nServed as a missionary for 2 years in South America as a leader of up to twelve American and Foreign colleagues\nDoor to door sales and marketing experience\nCompeted in conference championships for Shotput in 1st season"
-  },
-  {
-    "objectID": "resume.html#skills",
-    "href": "resume.html#skills",
-    "title": "Josh Deere’s CV",
-    "section": "",
-    "text": "Power BI, Excel, Tableau, MySQL, Python, Word, PowerPoint, Outlook\nFluent in Spanish and Intermediate in Portuguese\nQuick to retain information and training to ensure smooth transition to new positions\nFlexible and dedicated ensuring proper care and attention to every detail\nWilling to receive criticism and assistance to learn new ways to solve issues or needs dependent on each situation\nDependable and hardworking. Not afraid to go any number of extra miles in any situation\nWorthy leader and communicator willing to assist with conflict resolution"
   },
   {
     "objectID": "Projects/project1.html",
@@ -422,15 +202,211 @@
     ]
   },
   {
-    "objectID": "full_stack.html",
-    "href": "full_stack.html",
+    "objectID": "Projects/project4.html",
+    "href": "Projects/project4.html",
+    "title": "Client Report - Can You Predict This",
+    "section": "",
+    "text": "Show the code\n# %%\n# Load modules\nfrom sklearn.model_selection import train_test_split\nfrom sklearn import tree\nfrom sklearn import metrics\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Projects/project4.html#elevator-pitch",
+    "href": "Projects/project4.html#elevator-pitch",
+    "title": "Client Report - Can You Predict This",
+    "section": "Elevator pitch",
+    "text": "Elevator pitch\nThis project is on creating a model that can predict whether a home was built prior to implementation of rules on asbestos. I found that the best metrics for prediction are the number of dwelling units, stories in the home, and the number of car space in the garage.\n\n\nRead and format project data\n# Load data\ndwellings_ml = pd.read_csv('https://github.com/byuidatascience/data4dwellings/raw/master/data-raw/dwellings_ml/dwellings_ml.csv')\n\n\nHighlight the Questions and Tasks",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Projects/project4.html#questiontask-1",
+    "href": "Projects/project4.html#questiontask-1",
+    "title": "Client Report - Can You Predict This",
+    "section": "QUESTION|TASK 1",
+    "text": "QUESTION|TASK 1\nCreate 2-3 charts that evaluate potential relationships between the home variables and before1980. Explain what you learn from the charts that could help a machine learning algorithm.\nLooking at the number of bedrooms and dwelling units, I can see some semblance of pattern in determining the likelihood of a home being built before 1980. The number of car space in the garage also is a solid predictor. The basement and finished basement metrics also are valid predictors, showing that the more finished basement space, the more likely the house was built after 1980.\n\n\nRead and format data\n# Include and execute your code here\nfig = px.histogram(dwellings_ml, x = 'numbdrm', y = 'stories',color = 'before1980')#,barmode='group',color_discrete_map={0:'RebeccaPurple',1:'MediumPurple'})\nfig.show()\n\n\n                                                \n\n\n\n\nShow the code\nfig = px.scatter(dwellings_ml, x = 'totunits', y = 'nocars',color = 'before1980')\nfig.show()\n\n\n                                                \n\n\n\n\nShow the code\nfig = px.scatter(dwellings_ml, x = 'finbsmnt', y = 'basement',color = 'before1980')\nfig.show()",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Projects/project4.html#questiontask-2",
+    "href": "Projects/project4.html#questiontask-2",
+    "title": "Client Report - Can You Predict This",
+    "section": "QUESTION|TASK 2",
+    "text": "QUESTION|TASK 2\nBuild a classification model labeling houses as being built “before 1980” or “during or after 1980”. Your goal is to reach or exceed 90% accuracy. Explain your final model choice (algorithm, tuning parameters, etc) and describe what other models you tried.\nI went with a decision tree model considering that they are very beginner friendly and was easy for me to understand and visualize. I did look at new models but for a lot of them I struggled to understand logic for how the algorithm was running.\n\n\nRead and format data\n# Include and execute your code here\nX = dwellings_ml[['nocars', 'totunits', 'stories', 'numbdrm','finbsmnt','basement','sprice']]\ny = dwellings_ml['before1980']\n\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=50, stratify=y)\n\nrf = RandomForestClassifier(random_state=0)  \nrf.fit(X, y)  \n\ny_pred = rf.predict(X)\n\naccuracy_score(y,y_pred)\n\n\n0.9673984201108541",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Projects/project4.html#questiontask-3",
+    "href": "Projects/project4.html#questiontask-3",
+    "title": "Client Report - Can You Predict This",
+    "section": "QUESTION|TASK 3",
+    "text": "QUESTION|TASK 3\nJustify your classification model by discussing the most important features selected by your model. This discussion should include a chart and a description of the features.\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Projects/project4.html#questiontask-4",
+    "href": "Projects/project4.html#questiontask-4",
+    "title": "Client Report - Can You Predict This",
+    "section": "QUESTION|TASK 4",
+    "text": "QUESTION|TASK 4\nDescribe the quality of your classification model using 2-3 different evaluation metrics. You also need to explain how to interpret each of the evaluation metrics you use.\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 4"
+    ]
+  },
+  {
+    "objectID": "Projects/project3.html",
+    "href": "Projects/project3.html",
+    "title": "Client Report - Finding Relationships in Baseball",
+    "section": "",
+    "text": "Show the code\nimport pandas as pd\nimport numpy as np\nimport sqlite3\nimport plotly_express as px\nShow the code\nsqlite_file = 'lahmansbaseballdb.sqlite'\ncon = sqlite3.connect(sqlite_file)",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "Projects/project3.html#elevator-pitch",
+    "href": "Projects/project3.html#elevator-pitch",
+    "title": "Client Report - Finding Relationships in Baseball",
+    "section": "Elevator pitch",
+    "text": "Elevator pitch\nBaseball is a very complex sport with a variety of measure to use for analysis. BYU-I has contributed to the baseball scene with players around the U.S. Batting average decreases the more you play, which is only natural considering that batters are human. The Yankees dominate the Red Sox with Wins over Losses over almost every season.",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "Projects/project3.html#deliverable-1",
+    "href": "Projects/project3.html#deliverable-1",
+    "title": "Client Report - Finding Relationships in Baseball",
+    "section": "DELIVERABLE 1",
+    "text": "DELIVERABLE 1\nWrite an SQL query to create a new dataframe about baseball players who attended BYU-Idaho. The new table should contain five columns: playerID, schoolID, salary, and the yearID/teamID associated with each salary. Order the table by salary (highest to lowest) and print out the table in your report.\nA lot of players are with SLN and FLO and making a decent salary. There is a player who is not listed in the salary table which would be missed without the proper join.\n\n\nShow the code\nq = '''\nSELECT DISTINCT c.playerID, s.schoolID, sa.salary, sa.yearID, sa.teamID\nFROM CollegePlaying AS c\nJOIN Schools AS s\nON c.schoolID = s.schoolID\nLEFT JOIN salaries AS sa\nON c.playerID = sa.playerID\nWHERE s.name_full LIKE \"Brigham Young University-Idaho\"\nORDER BY sa.salary DESC\n'''\n\npd.read_sql_query(q, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nschoolID\nsalary\nyearID\nteamID\n\n\n\n\n0\nlindsma01\nidbyuid\n4000000.0\n2014.0\nCHA\n\n\n1\nlindsma01\nidbyuid\n3600000.0\n2012.0\nBAL\n\n\n2\nlindsma01\nidbyuid\n2800000.0\n2011.0\nCOL\n\n\n3\nlindsma01\nidbyuid\n2300000.0\n2013.0\nCHA\n\n\n4\nlindsma01\nidbyuid\n1625000.0\n2010.0\nHOU\n\n\n5\nstephga01\nidbyuid\n1025000.0\n2001.0\nSLN\n\n\n6\nstephga01\nidbyuid\n900000.0\n2002.0\nSLN\n\n\n7\nstephga01\nidbyuid\n800000.0\n2003.0\nSLN\n\n\n8\nstephga01\nidbyuid\n550000.0\n2000.0\nSLN\n\n\n9\nlindsma01\nidbyuid\n410000.0\n2009.0\nFLO\n\n\n10\nlindsma01\nidbyuid\n395000.0\n2008.0\nFLO\n\n\n11\nlindsma01\nidbyuid\n380000.0\n2007.0\nFLO\n\n\n12\nstephga01\nidbyuid\n215000.0\n1999.0\nSLN\n\n\n13\nstephga01\nidbyuid\n185000.0\n1998.0\nPHI\n\n\n14\nstephga01\nidbyuid\n150000.0\n1997.0\nPHI\n\n\n15\ncatetr01\nidbyuid\nNaN\nNaN\nNone",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "Projects/project3.html#deliverable-2",
+    "href": "Projects/project3.html#deliverable-2",
+    "title": "Client Report - Finding Relationships in Baseball",
+    "section": "DELIVERABLE 2",
+    "text": "DELIVERABLE 2\nThis three-part question requires you to calculate batting average (number of hits divided by the number of at-bats)\n1. Write an SQL query that provides playerID, yearID, and batting average for players with at least 1 at bat that year. Sort the table from highest batting average to lowest, and then by playerid alphabetically.\nThere are a lot of players who only were at bat once and had a hit, giving them a 100% average. Of course, the more at bats, the lower the average because they aren’t robots and can hit everything.\n\n\nShow the code\nq = '''\nSELECT playerID, yearID, H, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS 'battingAverage%'\nFROM Batting\nGROUP BY playerID\nHAVING AB &gt;= 1\nORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) DESC, playerID \nLIMIT 5\n'''\n\npd.read_sql_query(q, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nyearID\nH\nAB\nbattingAverage%\n\n\n\n\n0\nabramge01\n1923\n1\n1\n100.0\n\n\n1\nallarko01\n2018\n1\n1\n100.0\n\n\n2\nbanisje01\n1991\n1\n1\n100.0\n\n\n3\nbassdo01\n1918\n1\n1\n100.0\n\n\n4\nbergejo02\n1922\n1\n1\n100.0\n\n\n\n\n\n\n\n\n2. Show the top 5 results in your report. Use the same query as above, but only include players with at least 10 at bats that year. Print the top 5 results.\n\n\nShow the code\nq2 = '''\nSELECT playerID, yearID, AB, CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 AS 'battingAverage%'\nFROM Batting\nGROUP BY playerID\nHAVING AB &gt;= 10\nORDER BY CAST(H AS FLOAT) / CAST(AB AS FLOAT) * 100 DESC, playerID\nLIMIT 5\n'''\npd.read_sql_query(q2, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nyearID\nAB\nbattingAverage%\n\n\n\n\n0\nnymanny01\n1974\n14\n64.285714\n\n\n1\nsilvech01\n1948\n14\n57.142857\n\n\n2\npuccige01\n1930\n16\n56.250000\n\n\n3\napplepe01\n1927\n11\n54.545455\n\n\n4\nariasjo01\n2006\n11\n54.545455\n\n\n\n\n\n\n\n\n3.Now calculate the batting average for players over their entire careers (all years combined). Only include players with at least 100 at bats, and print the top 5 results.\n\n\nShow the code\nq3 = '''\nSELECT playerID, SUM(AB) AS 'At Bats', SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 AS 'battingAverage%'\nFROM Batting\nGROUP BY playerID\nHAVING SUM(AB) &gt;= 100\nORDER BY SUM(CAST(H AS FLOAT)) / SUM(CAST(AB AS FLOAT)) * 100 * 100 DESC, playerID\nLIMIT 5\n'''\npd.read_sql_query(q3, con)\n\n\n\n\n\n\n\n\n\n\nplayerID\nAt Bats\nbattingAverage%\n\n\n\n\n0\ncobbty01\n11436\n36.629941\n\n\n1\nbarnero01\n2391\n35.968214\n\n\n2\nhornsro01\n8173\n35.849749\n\n\n3\njacksjo01\n4981\n35.575186\n\n\n4\nmeyerle01\n1443\n35.550936",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "Projects/project3.html#deliverable-3",
+    "href": "Projects/project3.html#deliverable-3",
+    "title": "Client Report - Finding Relationships in Baseball",
+    "section": "DELIVERABLE 3",
+    "text": "DELIVERABLE 3\nPick any two baseball teams and compare them using a metric of your choice (average salary, home runs, number of wins, etc). Write an SQL query to get the data you need, then make a graph using Plotly Express to visualize the comparison. What do you learn?\nThe Red Sox suffered in the 20s, while the Yankees dominated the conference. But some of the Sox’s best seasons have been within the last 50 years, while the Yankees have struggled as of late.\n\n\nShow the code\nqy = '''\nSELECT name, yearID, teamID, W, L, CAST(W AS FLOAT) / CAST(L AS FLOAT) AS 'W/L Ratio'\nFROM Teams\nWHERE name IN ('New York Yankees','Boston Red Sox')\nORDER BY W DESC\n'''\n# Sox in where clause with AND to put on same table\nresults = pd.read_sql_query(qy, con)\nresults\n\n\n\n\n\n\n\n\n\n\nname\nyearID\nteamID\nW\nL\nW/L Ratio\n\n\n\n\n0\nNew York Yankees\n1998\nNYA\n114\n48\n2.375000\n\n\n1\nNew York Yankees\n1927\nNYA\n110\n44\n2.500000\n\n\n2\nNew York Yankees\n1961\nNYA\n109\n53\n2.056604\n\n\n3\nBoston Red Sox\n2018\nBOS\n108\n54\n2.000000\n\n\n4\nNew York Yankees\n1932\nNYA\n107\n47\n2.276596\n\n\n...\n...\n...\n...\n...\n...\n...\n\n\n214\nBoston Red Sox\n1930\nBOS\n52\n102\n0.509804\n\n\n215\nBoston Red Sox\n1927\nBOS\n51\n103\n0.495146\n\n\n216\nBoston Red Sox\n1925\nBOS\n47\n105\n0.447619\n\n\n217\nBoston Red Sox\n1926\nBOS\n46\n107\n0.429907\n\n\n218\nBoston Red Sox\n1932\nBOS\n43\n111\n0.387387\n\n\n\n\n219 rows × 6 columns\n\n\n\n\n\n\nShow the code\nfig = pd.read_sql_query(qy, con)\n\nfig = px.bar (results,title= 'The Yankees and The Sox' , x = 'yearID', y = 'W/L Ratio', color= 'name')\nfig.show()",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 3"
+    ]
+  },
+  {
+    "objectID": "Projects/project5.html",
+    "href": "Projects/project5.html",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "paste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Include and execute your code here\ndf = pd.read_csv(\"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\")\n\n\nHighlight the Questions and Tasks",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "Projects/project5.html#elevator-pitch",
+    "href": "Projects/project5.html#elevator-pitch",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "",
+    "text": "paste your elevator pitch here A SHORT (4-5 SENTENCES) PARAGRAPH THAT DESCRIBES KEY INSIGHTS TAKEN FROM METRICS IN THE PROJECT RESULTS THINK TOP OR MOST IMPORTANT RESULTS.\n\n\nRead and format project data\n# Include and execute your code here\ndf = pd.read_csv(\"https://github.com/byuidatascience/data4names/raw/master/data-raw/names_year/names_year.csv\")\n\n\nHighlight the Questions and Tasks",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "Projects/project5.html#questiontask-1",
+    "href": "Projects/project5.html#questiontask-1",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "QUESTION|TASK 1",
+    "text": "QUESTION|TASK 1\nCOPY PASTE QUESTION|TASK 1 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q1 chart .cell execution_count=4}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q1 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=5}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "Projects/project5.html#questiontask-2",
+    "href": "Projects/project5.html#questiontask-2",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "QUESTION|TASK 2",
+    "text": "QUESTION|TASK 2\nCOPY PASTE QUESTION|TASK 2 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q2 chart .cell execution_count=7}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q2 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=8}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "Projects/project5.html#questiontask-3",
+    "href": "Projects/project5.html#questiontask-3",
+    "title": "Client Report - [Insert Project Title]",
+    "section": "QUESTION|TASK 3",
+    "text": "QUESTION|TASK 3\nCOPY PASTE QUESTION|TASK 3 FROM THE PROJECT HERE\ntype your results and analysis here\n\n\nRead and format data\n# Include and execute your code here\n\n\ninclude figures in chunks and discuss your findings in the figure.\n::: {#cell-Q3 chart .cell execution_count=10}\n\nplot example\n# Include and execute your code here\nchart = px.bar(df.head(200),\n    x=\"name\", \n    y=\"AK\"\n)\nchart.show()\n\n\n                                                \nMy useless chart\n\n:::\n::: {#cell-Q3 table .cell .tbl-cap-location-top tbl-cap=‘Not much of a table’ execution_count=11}\n\ntable example\n# Include and execute your code here\nmydat = df.head(1000)\\\n    .groupby('year')\\\n    .sum()\\\n    .reset_index()\\\n    .tail(10)\\\n    .filter([\"year\", \"AK\",\"AR\"])\n\ndisplay(mydat)\n\n\n\n\n\n\n\n\n\n\nyear\nAK\nAR\n\n\n\n\n96\n2006\n21.0\n183.0\n\n\n97\n2007\n28.0\n153.0\n\n\n98\n2008\n36.0\n212.0\n\n\n99\n2009\n34.0\n179.0\n\n\n100\n2010\n22.0\n196.0\n\n\n101\n2011\n41.0\n148.0\n\n\n102\n2012\n28.0\n140.0\n\n\n103\n2013\n26.0\n134.0\n\n\n104\n2014\n20.0\n114.0\n\n\n105\n2015\n28.0\n121.0\n\n\n\n\n\n\n\n:::",
+    "crumbs": [
+      "DS250 Projects",
+      "Project 5"
+    ]
+  },
+  {
+    "objectID": "projects.html",
+    "href": "projects.html",
+    "title": "DS250 Projects",
+    "section": "",
+    "text": "Project 1\nProject 2\nProject 3\nProject 4\nProject 5",
+    "crumbs": [
+      "DS250 Projects"
+    ]
+  },
+  {
+    "objectID": "projects.html#repo-for-all-my-projects",
+    "href": "projects.html#repo-for-all-my-projects",
+    "title": "DS250 Projects",
+    "section": "",
+    "text": "Project 1\nProject 2\nProject 3\nProject 4\nProject 5",
+    "crumbs": [
+      "DS250 Projects"
+    ]
+  },
+  {
+    "objectID": "competition.html",
+    "href": "competition.html",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
   },
   {
-    "objectID": "full_stack.html#title-2-header",
-    "href": "full_stack.html#title-2-header",
+    "objectID": "competition.html#title-2-header",
+    "href": "competition.html#title-2-header",
     "title": "about me",
     "section": "",
     "text": "MarkDown Basics"
@@ -448,5 +424,40 @@
     "title": "Joshua Deere",
     "section": "",
     "text": "MarkDown Basics"
+  },
+  {
+    "objectID": "resume.html",
+    "href": "resume.html",
+    "title": "Josh Deere’s CV",
+    "section": "",
+    "text": "Student\n\ndeerejoshm@gmail.com | My LinkedIn\n\n\n\n2020-2025 Brigham Young University-Idaho, Business Analytics\nRelated Courses: Managerial Accounting, Spreadsheet Analysis for Business, Programming With Functions, Business Analytics, Financial Management, Business Statistics, Data Science Programming, Database Design and Development, Business Intelligence and Analysis\n\n\n\nApril 2023-Sep 2023 BYU-I, Project Coordinator, Rexburg, ID\n\nPromoted to Coordinator in less than 14 weeks after starting position\nDirected a team of students in accomplishing grounds-keeping tasks in 4 hour increments\nOffered assistance each week to other teams to complete advanced and complicated projects as coordinator for both groups\nPerformed physically strenuous tasks for long hours both in a team and solo environment such as heavy equipment operation and maintenance\nCoordinated with Supervisor Lead to plan weekly agenda and projects requiring immediate attention\n\nMay 2022-Aug 2022 Mountain America Credit Union, Member Experience Officer, Idaho Falls, ID\n\nOrganized branch data and loan volume in Excel to improve performance metrics in branch\nPrepared and processed personal and business loan documents in Word for colleagues after only one week of training\nRescued up to $100k in predatory loans in auto, credit card, and personal loan market after only 3 months\nFinalized all loan applications on day of credit pull or within one week of loan request\nCompleted all loan applications with little or no compliance errors after only 1 month of working\n\nApril 2021-Sep 2021 Chick-fil-a, Team Lead, Colorado Springs, CO\n\nTrained for leadership position within 2 months of training while advancing productivity by 15%\nLearned and mastered all positions in less than two months\nImplemented new employee performance metric and customer outreach program with owner after only 1 month\n\n\n\n\n\nJazz ensemble Lead drummer\nVarious physical pursuits such as Football and Bodybuilding\nServed as a missionary for 2 years in South America as a leader of up to twelve American and Foreign colleagues\nDoor to door sales and marketing experience\nCompeted in conference championships for Shotput in 1st season\n\n\n\n\n\nPower BI, Excel, Tableau, MySQL, Python, Word, PowerPoint, Outlook\nFluent in Spanish and Intermediate in Portuguese\nQuick to retain information and training to ensure smooth transition to new positions\nFlexible and dedicated ensuring proper care and attention to every detail\nWilling to receive criticism and assistance to learn new ways to solve issues or needs dependent on each situation\nDependable and hardworking. Not afraid to go any number of extra miles in any situation\nWorthy leader and communicator willing to assist with conflict resolution"
+  },
+  {
+    "objectID": "resume.html#education",
+    "href": "resume.html#education",
+    "title": "Josh Deere’s CV",
+    "section": "",
+    "text": "2020-2025 Brigham Young University-Idaho, Business Analytics\nRelated Courses: Managerial Accounting, Spreadsheet Analysis for Business, Programming With Functions, Business Analytics, Financial Management, Business Statistics, Data Science Programming, Database Design and Development, Business Intelligence and Analysis"
+  },
+  {
+    "objectID": "resume.html#employment",
+    "href": "resume.html#employment",
+    "title": "Josh Deere’s CV",
+    "section": "",
+    "text": "April 2023-Sep 2023 BYU-I, Project Coordinator, Rexburg, ID\n\nPromoted to Coordinator in less than 14 weeks after starting position\nDirected a team of students in accomplishing grounds-keeping tasks in 4 hour increments\nOffered assistance each week to other teams to complete advanced and complicated projects as coordinator for both groups\nPerformed physically strenuous tasks for long hours both in a team and solo environment such as heavy equipment operation and maintenance\nCoordinated with Supervisor Lead to plan weekly agenda and projects requiring immediate attention\n\nMay 2022-Aug 2022 Mountain America Credit Union, Member Experience Officer, Idaho Falls, ID\n\nOrganized branch data and loan volume in Excel to improve performance metrics in branch\nPrepared and processed personal and business loan documents in Word for colleagues after only one week of training\nRescued up to $100k in predatory loans in auto, credit card, and personal loan market after only 3 months\nFinalized all loan applications on day of credit pull or within one week of loan request\nCompleted all loan applications with little or no compliance errors after only 1 month of working\n\nApril 2021-Sep 2021 Chick-fil-a, Team Lead, Colorado Springs, CO\n\nTrained for leadership position within 2 months of training while advancing productivity by 15%\nLearned and mastered all positions in less than two months\nImplemented new employee performance metric and customer outreach program with owner after only 1 month"
+  },
+  {
+    "objectID": "resume.html#involvement-and-activities",
+    "href": "resume.html#involvement-and-activities",
+    "title": "Josh Deere’s CV",
+    "section": "",
+    "text": "Jazz ensemble Lead drummer\nVarious physical pursuits such as Football and Bodybuilding\nServed as a missionary for 2 years in South America as a leader of up to twelve American and Foreign colleagues\nDoor to door sales and marketing experience\nCompeted in conference championships for Shotput in 1st season"
+  },
+  {
+    "objectID": "resume.html#skills",
+    "href": "resume.html#skills",
+    "title": "Josh Deere’s CV",
+    "section": "",
+    "text": "Power BI, Excel, Tableau, MySQL, Python, Word, PowerPoint, Outlook\nFluent in Spanish and Intermediate in Portuguese\nQuick to retain information and training to ensure smooth transition to new positions\nFlexible and dedicated ensuring proper care and attention to every detail\nWilling to receive criticism and assistance to learn new ways to solve issues or needs dependent on each situation\nDependable and hardworking. Not afraid to go any number of extra miles in any situation\nWorthy leader and communicator willing to assist with conflict resolution"
   }
 ]
