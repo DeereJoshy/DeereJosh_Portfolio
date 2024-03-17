@@ -102,6 +102,8 @@ y_pred = rf.predict(X)
 
 accuracy_score(y,y_pred)
 
+print(metrics.classification_report(y_pred,y_test))
+
 ```
 
 ## QUESTION|TASK 3
@@ -114,7 +116,11 @@ _type your results and analysis here_
 #| label: Q3
 #| code-summary: Read and format data
 # Include and execute your code here
+df = pd.DataFrame({'Real Values':y,'Predicted Values':y_pred})
+df
 
+fig = px.line(df,x = 'Real Values',y = 'Predicted Values')
+fig.show()
 
 ```
 
