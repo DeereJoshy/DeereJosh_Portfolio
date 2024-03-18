@@ -66,8 +66,28 @@ _Looking at the number of bedrooms and dwelling units, I can see some semblance 
 #| label: Q1
 #| code-summary: Read and format data
 # Include and execute your code here
-fig = px.histogram(dwellings_ml, x = 'numbdrm', y = 'stories',color = 'before1980')#,barmode='group',color_discrete_map={0:'RebeccaPurple',1:'MediumPurple'})
+story_mean = dwellings_ml['stories'].mean()
+
+
+
+fig = px.strip(dwellings_ml, x = 'numbdrm' , y = 'stories',color = 'before1980')
+
+# fig.add_trace(px.box(dwellings_ml,
+#   x = 'numbdrm',
+#   y = 'stories',
+#   points = False
+# ))
+
+fig.update_traces(quartilemethod = 'linear')
+
+fig.update_layout(title = 'The More Bedrooms, The Newer the Home',yaxis = dict(
+  autorange = True,
+  showgrid = True,
+  dtick = 1
+))
+
 fig.show()
+# Boxplots for graph for each bedroom number
 ```
 
 ```{python}
@@ -102,25 +122,21 @@ y_pred = rf.predict(X)
 
 accuracy_score(y,y_pred)
 
-print(metrics.classification_report(y_pred,y_test))
-
 ```
 
 ## QUESTION|TASK 3
 
 __Justify your classification model by discussing the most important features selected by your model. This discussion should include a chart and a description of the features.__
 
-_type your results and analysis here_
+_The most important features in the model was selling price and the number of stories in the home. The size of the basement also had minor weight in the model prediction as well._
 
 ```{python}
 #| label: Q3
 #| code-summary: Read and format data
 # Include and execute your code here
-df = pd.DataFrame({'Real Values':y,'Predicted Values':y_pred})
-df
-
-fig = px.line(df,x = 'Real Values',y = 'Predicted Values')
-fig.show()
+df_features = pd.DataFrame(
+    {'f_names': X_train.columns, 
+    'f_values': rf.feature_importances_}).sort_values('f_values', ascending = False)
 
 ```
 
@@ -135,5 +151,6 @@ _type your results and analysis here_
 #| code-summary: Read and format data
 # Include and execute your code here
 
+# print(metrics.classification_report(y_pred,y_test))
 
 ```
