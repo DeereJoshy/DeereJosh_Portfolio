@@ -31,6 +31,7 @@ execute:
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 ```
 
 ```{python}
@@ -68,22 +69,37 @@ _Looking at the number of bedrooms and dwelling units, I can see some semblance 
 # Include and execute your code here
 story_mean = dwellings_ml['stories'].mean()
 
+fig = px.box(dwellings_ml, 
+x = 'numbdrm', 
+y = 'stories',
+color = 'before1980',
+points = 'all')
 
+fig.add_annotation(
+  x = 0,
+  y = story_mean,
+  text = 'Average Stories per Home',
+  arrowhead = True)
 
-fig = px.strip(dwellings_ml, x = 'numbdrm' , y = 'stories',color = 'before1980')
-
-# fig.add_trace(px.box(dwellings_ml,
-#   x = 'numbdrm',
-#   y = 'stories',
-#   points = False
-# ))
+fig.add_shape(
+  type = 'line',
+  line_color = 'black',
+  line_dash = 'dot',
+  x0 = 0,
+  x1 = 1,
+  xref = 'paper',
+  y0 = story_mean,
+  y1 = story_mean,
+  yref = 'y'
+)
 
 fig.update_traces(quartilemethod = 'linear')
 
 fig.update_layout(title = 'The More Bedrooms, The Newer the Home',yaxis = dict(
   autorange = True,
   showgrid = True,
-  dtick = 1
+  dtick = 1,
+
 ))
 
 fig.show()
@@ -138,6 +154,13 @@ df_features = pd.DataFrame(
     {'f_names': X_train.columns, 
     'f_values': rf.feature_importances_}).sort_values('f_values', ascending = False)
 
+chart = px.bar(df_features.head(10),
+    x='f_values', 
+    y='f_names'
+)
+
+chart.update_layout(yaxis={'categoryorder':'total ascending'})    
+
 ```
 
 ## QUESTION|TASK 4
@@ -151,6 +174,7 @@ _type your results and analysis here_
 #| code-summary: Read and format data
 # Include and execute your code here
 
-# print(metrics.classification_report(y_pred,y_test))
+#print(metrics.classification_report(y_pred,y_test))
 
+#metrics.RocCurveDisplay.from_estimator(rf, X_test, y_test)
 ```
